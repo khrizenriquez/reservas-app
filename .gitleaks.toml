@@ -1,0 +1,8 @@
+title = "Reservas app secret scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "The design-token contract contains only public SHA-256 integrity digests."
+paths = ['''^specs/design-token-contract\.json$''']
