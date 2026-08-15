@@ -29,6 +29,11 @@ Primary API source of truth:
 - Mobile framework: React Native with Expo.
 - Language: JavaScript.
 - Flutter and Dart are out of scope unless a new ADR approves a stack change.
+- API style: REST over HTTP.
+- Network pattern: native async/await calls using fetch or Expo-native networking; no Axios default dependency.
+- State management: prefer minimal local state and React Context; Zustand is optional for explicit shared-session or UI state.
+- Validation: Zod is optional and used only where runtime validation provides clear product benefit; avoid heavy schema frameworks unless required.
+- CORS: browser CORS does not apply to the native mobile client; server-side CORS policy is managed by the backend for web origins only.
 
 ## Trunk-based rules
 

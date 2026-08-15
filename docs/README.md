@@ -11,7 +11,16 @@ Use these docs as the first commit in a new project so implementation starts wit
 - architecture decisions and status;
 - spec-driven development controls;
 - traceability from requirements to code and tests;
-- AI-assisted development guardrails.
+- AI-assisted development guardrails;
+- explicit implementation technology constraints for REST, native async networking, CORS, and lightweight state/validation choices.
+
+## Technology policy baseline
+
+- API layer is REST-first and contract-driven.
+- The mobile client uses native async/await networking and avoids Axios by default.
+- CORS is handled by the backend for browser clients; it is not a mobile-client concern.
+- Keep dependencies lean: minimal local state, optional Zustand for shared stores, and optional Zod for boundary validation.
+- Do not add heavy app-wide state or schema libraries unless the acceptance criteria require them.
 
 ## Recommended commit order
 
