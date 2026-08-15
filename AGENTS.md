@@ -1,33 +1,32 @@
-# Reservas App - Trunk-Based Bootstrap
+# AGENTS Operating Guide
 
-This repository is now prepared as a clean-start baseline for a spec-driven build.
+This file defines how humans and AI agents must work in this repository.
 
-## Mission
+## Product intent
 
-Build the mobile reservation experience with strict alignment to:
+Build the mobile reservation client using spec-driven development and trunk-based delivery.
 
-- product and acceptance specifications;
-- ADR governance;
-- trunk-based development;
-- API data coming from Render.
-
-Primary API source of truth:
+Primary backend source:
 
 - `https://umg-api-django.onrender.com/api/docs/`
 
-## Trunk-based development rules
+All pages, dashboards, and data integrations must use this API surface.
+
+## Delivery model
+
+Use trunk-based development:
+
+- `main` is always stable and releasable.
+- Branches are short-lived.
+- Changes are merged in small batches.
+- Branches are deleted after merge.
+- CI gates must be green before merge.
 
 Reference: Atlassian trunk-based development.
 
-- `main` must stay stable and releasable.
-- Work in short-lived branches only.
-- Merge small changes frequently.
-- Delete branches after merge.
-- Keep CI checks green before merge.
+## Branch naming policy
 
-## Branch naming convention
-
-Use only these patterns:
+Allowed formats:
 
 - `feature/<short-topic>`
 - `fix/<short-topic>`
@@ -38,30 +37,38 @@ Examples:
 - `feature/backend-connectivity`
 - `fix/get-main-dashboard-info`
 
-## Commit message convention
+## Commit message policy
 
-- Short, clear, native English.
-- Imperative/action style.
-- Examples: `add login flow`, `connect dashboard api`, `fix reservation owner check`.
+- Keep messages short.
+- Use native English.
+- Use action-oriented phrasing.
 
-## Testing and quality gates
+Examples:
 
-- Use Jest for local tests.
-- Coverage must be greater than 80%.
-- Contract verification must pass before merge.
+- `add login screen`
+- `connect labs endpoint`
+- `fix dashboard load state`
 
-Recommended local flow:
+## Required quality gates
+
+Before merge into `main`:
+
+1. Contract verification passes.
+2. Lint passes.
+3. Jest test suite passes.
+4. Jest coverage is greater than 80%.
+
+Suggested commands:
 
 ```bash
-npm install
 npm run contract
 npm run lint
 npm test -- --coverage
 ```
 
-## API endpoints list (from Render schema)
+## API endpoint inventory
 
-The current API surface includes:
+Current endpoint inventory from Render schema:
 
 1. `POST /api/auth/cambiar-contrasena/`
 2. `POST /api/auth/login/`
@@ -84,9 +91,7 @@ The current API surface includes:
 19. `PATCH /api/usuarios/{id}/inactivar/`
 20. `PATCH /api/usuarios/{id}/resetear-contrasena/`
 
-## Mobile-critical endpoints
-
-The app-critical set currently used by mobile flows:
+## Mobile-critical endpoint subset
 
 1. `POST /api/auth/login/`
 2. `POST /api/auth/cambiar-contrasena/`
@@ -98,8 +103,11 @@ The app-critical set currently used by mobile flows:
 8. `PUT /api/reservas/{id}/modificar/`
 9. `PATCH /api/reservas/{id}/cancelar/`
 
-## Governance docs
+## Documentation baseline
 
+Keep these files synchronized with implementation and API behavior:
+
+- `README.md`
 - `docs/README.md`
 - `docs/PROJECT_SPEC.md`
 - `docs/ADR_REGISTER.md`
