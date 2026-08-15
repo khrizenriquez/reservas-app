@@ -1,25 +1,34 @@
-# Política de seguridad
-
-No se versionan `.env`, tokens, llaves de firma, credenciales Expo, secretos de API,
-sesiones ni capturas con información personal. Reporte cualquier hallazgo por el
-canal privado acordado con el mantenedor.
-
-## Excepción temporal — `image-size` de Metro
-
-- Aprobada: 2026-08-08.
-- Revisión: 2026-08-22 y en cada actualización Expo/Metro.
-- Advisories permitidos: `GHSA-w3rx-r6r6-pgpr` y `GHSA-5p2g-fcmc-qvqq`.
-
-Los hallazgos afectan el parser ICNS/JXL/HEIF de `image-size@1.2.1`, transitivo del
-empaquetador Metro. Al aprobar esta excepción no existía una versión corregida en npm:
-el rango vulnerable cubría hasta la última `2.0.2`, y el fix automático proponía una
 degradación incompatible de Expo 57 a 53.
+# Security Policy
 
-El repositorio contiene únicamente assets PNG/SVG controlados; no acepta ICNS, JXL ni
-HEIF externos. Metro se usa solo durante desarrollo/empaquetado local y no se ejecuta
-dentro de la APK. `npm run audit:release` permite exclusivamente esos dos advisories y
-falla si aparece cualquier raíz adicional o vulnerabilidad crítica.
+## Scope
 
-La excepción se cierra al publicarse una actualización compatible corregida. En ese
-momento se actualizan dependencias, se retira el filtro y se repiten Jest, Expo Doctor,
-APK, SBOM y E2E móvil.
+This repository currently stores governance, documentation, and specifications used to build the project from scratch.
+
+## Sensitive data rules
+
+Do not commit any of the following:
+
+- `.env` files
+- API keys, tokens, passwords, credentials, or session data
+- signing keys, certificates, or private key material
+- personal data in screenshots, logs, prompts, or test fixtures
+
+## Vulnerability reporting
+
+Report security issues through the maintainer private communication channel.
+Do not open public issues with exploit details.
+
+## Merge security requirements
+
+Security-sensitive changes must include:
+
+- human review
+- documented risk assessment
+- verification evidence
+
+Do not merge unresolved critical security findings.
+
+## Dependency and tooling posture
+
+When runtime code and dependency manifests are introduced, add dependency vulnerability checks to the quality gates and fail the pipeline on critical findings unless an explicit, time-bound exception is documented.
