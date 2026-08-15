@@ -26,6 +26,30 @@ Out of scope:
 - React 19.2
 - Expo Router
 - JavaScript runtime (no TypeScript migration in this product cycle)
+- REST HTTP contract, native async/await network calls, and fetch-based handling
+- Lightweight state management strategy: local state + React Context, with Zustand allowed only for explicit shared-session or cross-screen store cases
+- Optional runtime validation with Zod on form and API boundary inputs; not mandatory for every screen or endpoint
+
+## Implementation constraints derived from user stories and acceptance criteria
+
+### HTTP and API behavior
+
+- The mobile app is REST-first and calls the backend through explicit endpoints and resource-oriented operations.
+- The native client does not implement browser CORS logic. CORS governs server-side behavior for web origins and is not a client-side mobile concern.
+- Requests are executed using native async/await patterns; the project should default to fetch-based requests and avoid adding Axios unless a genuine regression or convenience case justifies it.
+- All network errors, retry conditions, and stale-state indicators must be handled explicitly at the API boundary.
+
+### State and validation strategy
+
+- Keep state management intentionally small and predictable. Prefer component state or a narrow context store for screen-local behavior.
+- Use Zustand only when there is a clear shared state need such as auth/session or cross-screen reservation state.
+- Use Zod for validation at meaningful input boundaries only; do not create a broad schema-heavy architecture that adds unnecessary complexity.
+
+### Product and UX constraints
+
+- Device and connectivity behavior is part of the UX contract: no offline mutation queue, no hidden stale-data state, and no lossy permission handling.
+- Permission, refresh, and logout flows must be explicit and deterministic.
+- All critical actions remain mobile-first and must not depend on a dense admin web experience.
 
 ## Containerization applicability
 

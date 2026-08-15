@@ -66,6 +66,13 @@ npm run lint
 npm test -- --coverage
 ```
 
+## Security policy
+
+- Follow `SECURITY.md` for all security handling and disclosure.
+- Never commit secrets, tokens, private keys, credentials, or personal data.
+- Any security risk or vulnerability must be reported through the maintainer's private channel.
+- Do not merge changes with unresolved critical security findings.
+
 ## API endpoint inventory
 
 Current endpoint inventory from Render schema:
@@ -119,3 +126,4 @@ Keep these files synchronized with implementation and API behavior:
 - `docs/templates/PR_AI_RECORD_TEMPLATE.md`
 - `stack.md`
 - `todo-list.md`
+- `SECURITY.md`
