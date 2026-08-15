@@ -27,6 +27,13 @@ Out of scope:
 - Expo Router
 - JavaScript runtime (no TypeScript migration in this product cycle)
 
+## Containerization applicability
+
+- Podman is approved for reproducible local tooling and CI-like checks.
+- Containerized scope is lint, contract checks, and Jest once the runnable scaffold exists.
+- Native mobile runtime stays host-driven: iOS Simulator and Android Emulator are not primary Podman targets for this project.
+- Container assets should be introduced incrementally when source scaffold is added, not in docs-only baseline.
+
 ## API contract baseline
 
 - Profile: `legacy`

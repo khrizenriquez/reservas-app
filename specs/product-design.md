@@ -11,6 +11,7 @@ desktop administration tables onto a small screen.
 
 - Expo SDK 57, React Native 0.86, React 19.2, and the New Architecture.
 - Expo Router with JavaScript modules only; TypeScript is intentionally excluded.
+- Podman containers are allowed for reproducible tooling workflows, not as the primary runtime for mobile emulators.
 - Minimum Node.js version 22.13.0.
 - REST access through Kong using the versioned OpenAPI contract.
 - The access token remains in process memory. Only the rotating mobile refresh token is persisted

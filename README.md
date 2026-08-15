@@ -1,33 +1,44 @@
-# Reservas App - Trunk-Based Bootstrap
+# Reservas App
 
-This repository is now prepared as a clean-start baseline for a spec-driven build.
+This repository is intentionally kept as a baseline workspace to start the mobile client from scratch using governance-first delivery.
 
-## Mission
+## What exists in this baseline
 
-Build the mobile reservation experience with strict alignment to:
+- Root governance files: `README.md`, `SECURITY.md`, `AGENTS.md`.
+- Design and governance guides under `docs/`.
+- Product and contract specifications under `specs/`.
 
-- product and acceptance specifications;
-- ADR governance;
-- trunk-based development;
-- API data coming from Render.
+No runtime application code is expected in this stage.
+
+## How the project works
+
+The build process is spec-driven and trunk-based.
+
+1. Define or refine behavior in specs.
+2. Keep ADR and governance aligned.
+3. Implement in short-lived branches.
+4. Validate against contract, tests, and traceability.
+5. Merge small batches back to `main` only when gates are green.
 
 Primary API source of truth:
 
 - `https://umg-api-django.onrender.com/api/docs/`
 
-## Trunk-based development rules
+## Stack decision
 
-Reference: Atlassian trunk-based development.
+- Mobile framework: React Native with Expo.
+- Language: JavaScript.
+- Flutter and Dart are out of scope unless a new ADR approves a stack change.
 
-- `main` must stay stable and releasable.
-- Work in short-lived branches only.
-- Merge small changes frequently.
-- Delete branches after merge.
-- Keep CI checks green before merge.
+## Trunk-based rules
 
-## Branch naming convention
+- `main` stays stable and releasable.
+- Branches are short-lived.
+- Changes are merged in small batches.
+- Branches are deleted after merge.
+- CI gates must be green before merge.
 
-Use only these patterns:
+Branch naming:
 
 - `feature/<short-topic>`
 - `fix/<short-topic>`
@@ -38,30 +49,31 @@ Examples:
 - `feature/backend-connectivity`
 - `fix/get-main-dashboard-info`
 
-## Commit message convention
+Commit messages:
 
-- Short, clear, native English.
-- Imperative/action style.
-- Examples: `add login flow`, `connect dashboard api`, `fix reservation owner check`.
+- Short, native English, action-oriented.
+- Examples: `add login flow`, `connect labs endpoint`, `fix reservation filter`.
 
-## Testing and quality gates
+## Quality gates
 
-- Use Jest for local tests.
-- Coverage must be greater than 80%.
-- Contract verification must pass before merge.
+- Contract verification passes.
+- Lint passes.
+- Jest test suite passes.
+- Jest coverage stays above 80%.
 
-Recommended local flow:
+## Podman and containers
 
-```bash
-npm install
-npm run contract
-npm run lint
-npm test -- --coverage
-```
+Container usage is possible and recommended for reproducible developer tooling, with these limits:
 
-## API endpoints list (from Render schema)
+- Applies now: documentation and spec workflow standardization.
+- Applies after scaffold: run Node tooling (lint, tests, contract checks) in Podman containers.
+- Not applicable: iOS Simulator and Android Emulator execution cannot be fully containerized for normal mobile development.
 
-The current API surface includes:
+For this baseline phase, do not over-engineer container files yet. Add Podman startup assets when the first runnable app scaffold is introduced.
+
+## API endpoint inventory
+
+Current endpoints from Render schema:
 
 1. `POST /api/auth/cambiar-contrasena/`
 2. `POST /api/auth/login/`
@@ -84,9 +96,7 @@ The current API surface includes:
 19. `PATCH /api/usuarios/{id}/inactivar/`
 20. `PATCH /api/usuarios/{id}/resetear-contrasena/`
 
-## Mobile-critical endpoints
-
-The app-critical set currently used by mobile flows:
+Mobile-critical subset:
 
 1. `POST /api/auth/login/`
 2. `POST /api/auth/cambiar-contrasena/`
@@ -98,7 +108,7 @@ The app-critical set currently used by mobile flows:
 8. `PUT /api/reservas/{id}/modificar/`
 9. `PATCH /api/reservas/{id}/cancelar/`
 
-## Governance docs
+## Required docs
 
 - `docs/README.md`
 - `docs/PROJECT_SPEC.md`
@@ -107,4 +117,10 @@ The app-critical set currently used by mobile flows:
 - `docs/RPI_TRACEABILITY.md`
 - `docs/AI_HARNESS_PLAYBOOK.md`
 - `docs/COMMIT_START_CHECKLIST.md`
+- `docs/ARCHITECTURE_FLOWS.md`
 - `docs/templates/PR_AI_RECORD_TEMPLATE.md`
+
+## Root planning files
+
+- `todo-list.md`
+- `stack.md`

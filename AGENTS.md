@@ -115,4 +115,7 @@ Keep these files synchronized with implementation and API behavior:
 - `docs/RPI_TRACEABILITY.md`
 - `docs/AI_HARNESS_PLAYBOOK.md`
 - `docs/COMMIT_START_CHECKLIST.md`
+- `docs/ARCHITECTURE_FLOWS.md`
 - `docs/templates/PR_AI_RECORD_TEMPLATE.md`
+- `stack.md`
+- `todo-list.md`

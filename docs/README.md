@@ -36,6 +36,7 @@ These docs are derived from the current repository governance/spec assets:
 ## Files in this folder
 
 - `PROJECT_SPEC.md`: product and technical baseline.
+- `ARCHITECTURE_FLOWS.md`: architecture context and interaction diagrams.
 - `ADR_REGISTER.md`: ADR inventory and active status.
 - `SDD_GOVERNANCE.md`: spec-driven workflow and gates.
 - `RPI_TRACEABILITY.md`: requirement-policy-implementation trace model.
@@ -87,3 +88,7 @@ For deterministic contract checks in-repo, use pinned artifacts under `specs/`.
 ## Testing gate
 
 Local Jest coverage target must stay above 80% before merge.
+
+## Container note
+
+Podman support applies to reproducible tooling flows (lint, tests, contract checks) once scaffold exists. Native mobile emulators remain host-driven.

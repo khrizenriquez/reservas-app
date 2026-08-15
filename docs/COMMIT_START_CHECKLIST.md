@@ -23,6 +23,12 @@ Use this before opening the first implementation PR in a new repository.
 - [ ] CI pipeline wired to fail on gate errors.
 - [ ] Evidence storage convention defined (artifacts/logs/checksums).
 
+## Container readiness (if enabled)
+
+- [ ] Podman is available in developer environments.
+- [ ] Tooling commands can run in a containerized Node environment.
+- [ ] Container scope is documented as tooling-only for mobile (not emulator runtime).
+
 ## Security readiness
 
 - [ ] Secret handling policy documented.
