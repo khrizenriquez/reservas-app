@@ -15,3 +15,6 @@ one-to-one and that every listed Render operation exists in the pinned contract.
 `__tests__/render-api.test.js` additionally invokes every published operation
 against a mocked transport and verifies the documented path, method, payload,
 query, mapping, and localized failure behavior.
+`__tests__/session-provider.test.js` proves that SecureStore receives only the
+normalized UI identity, restores it across relaunch, clears it on sign-out, and
+uses the users endpoint only when login omits identity data.

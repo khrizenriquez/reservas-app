@@ -36,6 +36,11 @@ backend must enforce authorization.
   validator exclusion must not hide `npm ls` or Expo Doctor failures.
 - Persist only normalized `id`, `name`, `email`, and `role` in Expo SecureStore
   across relaunch. Never store a password, token, cookie, or full API response.
+- The root route waits for SecureStore restoration, then directs unauthenticated
+  users to Access and restored identities to Portal. Login may consult the
+  published users list only when its direct response omits an identity.
+- Administrative destinations are derived from the normalized UI role and are
+  navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,
   push, report, or invented endpoint may be used.
 - `src/api/renderApi.js` is the only transport boundary. It maps all 19 published

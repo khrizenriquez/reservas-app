@@ -12,6 +12,14 @@ operations; it sends no authorization header, excludes credentials, and maps
 transport and HTTP failures to ES/EN-safe messages. Set only the public base
 URL in `.env` from `.env.example`; do not place credentials in environment files.
 
+## Session boundary
+
+`src/session/SessionProvider.js` restores and stores only `{ id, name, email,
+role }` under Expo SecureStore. The access route sends the password only to the
+published login operation, then clears it from the form; it is never written to
+storage. Administrative navigation is UI visibility only and does not grant
+backend authorization.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

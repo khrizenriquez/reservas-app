@@ -32,7 +32,7 @@
 - [x] **03 — `feature/render-contract-client`: bind the complete Render v1 contract.**
   Implement and test login, password, labs, conditions, availability,
   reservations, users, and logs with mappers and localized errors.
-- [ ] **04 — `feature/mobile-session-access`: implement persistent UI session.**
+- [x] **04 — `feature/mobile-session-access`: implement persistent UI session.**
   Add SecureStore-backed normalized identity, login, sign-out, route guard, and
   role-aware navigation without claiming backend authorization.
 - [ ] **05 — `feature/mobile-shell-theme-i18n`: build native shared UX.**

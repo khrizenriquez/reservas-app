@@ -38,17 +38,18 @@ export function getRenderErrorMessage(error, locale = "es") {
 }
 
 export function mapUser(record = {}) {
+  const user = record.usuario ?? record.user ?? record.data?.usuario ?? record.data ?? record;
   return {
-    id: record.UMG_ID,
-    username: record.UMG_Usuario,
-    name: record.UMG_Nombre,
-    lastName: record.UMG_Apellido,
-    roleId: record.UMG_Rol_ID,
-    roleName: record.UMG_Rol_Nombre,
-    status: record.UMG_Estado,
-    admission: record.UMG_Ingreso,
-    createdAt: record.UMG_Fecha_Creacion,
-    lastAccess: record.UMG_Ultimo_Acceso
+    id: user.UMG_ID ?? user.id,
+    username: user.UMG_Usuario ?? user.username ?? user.email,
+    name: user.UMG_Nombre ?? user.name,
+    lastName: user.UMG_Apellido ?? user.lastName,
+    roleId: user.UMG_Rol_ID ?? user.roleId ?? user.role?.id,
+    roleName: user.UMG_Rol_Nombre ?? user.roleName ?? user.role?.name,
+    status: user.UMG_Estado ?? user.status,
+    admission: user.UMG_Ingreso ?? user.admission,
+    createdAt: user.UMG_Fecha_Creacion ?? user.createdAt,
+    lastAccess: user.UMG_Ultimo_Acceso ?? user.lastAccess
   };
 }
 
