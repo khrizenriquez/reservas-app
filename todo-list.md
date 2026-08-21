@@ -44,7 +44,7 @@
 - [x] **07 — `feature/mobile-availability`: deliver availability search.**
   Add date/interval validation, real `GET /api/labs/disponibles/` results,
   time-rail cards, and handoff to the reservation form.
-- [ ] **08 — `feature/mobile-reservations`: deliver the full reservation flow.**
+- [x] **08 — `feature/mobile-reservations`: deliver the full reservation flow.**
   Implement list/filter, detail, create, edit, cancel confirmation, future and
   ownership UI rules, pagination/list behavior, and offline mutation blocking.
 - [ ] **09 — `feature/mobile-profile-password`: implement profile and password change.**

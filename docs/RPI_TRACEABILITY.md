@@ -28,3 +28,6 @@ announcement.
 `__tests__/availability.test.js` verifies strict local date/interval validation,
 the documented availability query, time-rail results, reservation handoff,
 empty/API-error states, and the offline request guard.
+`__tests__/reservations.test.js` verifies list filters, availability handoff,
+create/detail/update/cancel operations, future/ownership UI rules, cancellation
+confirmation, and offline mutation blocking.

@@ -40,6 +40,10 @@ interval before calling the documented availability operation. Its native time
 rail marks the returned laboratories as available, and its reservation handoff
 contains only `labId`, date, start time, and end time.
 
+Reservations consumes Render list/create/detail/update/cancel operations only.
+Professor UI exposes mutations solely for own future records; cancellation uses
+a native confirmation dialog and every mutation is disabled offline.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

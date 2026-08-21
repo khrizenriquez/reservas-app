@@ -39,6 +39,10 @@ sequenceDiagram
   `getLabAvailability` with `fecha`, `hora_inicio`, and `hora_fin`. Its selected
   lab route state is limited to `labId`, date, start time, and end time for the
   subsequent reservation screen.
+- Reservations keeps the API operations behind one feature surface: list filters
+  use only documented query keys; create/update/cancel remain disabled offline;
+  detail uses its published id route; and cancellation passes through a native
+  confirmation dialog before transport.
 - The mobile shell provides bottom navigation, theme and language controls, and
   a native NetInfo-backed offline banner. It does not queue work; future mutation
   screens consume its connectivity context to disable actions before transport.
