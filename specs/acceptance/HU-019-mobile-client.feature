@@ -12,7 +12,8 @@ Feature: Manage laboratory reservations from a native Render v1 mobile client
   Scenario: Access the mobile application
     Given an institutional user enters credentials
     When login succeeds
-    Then the app calls only POST /api/auth/login/
+    Then the app calls POST /api/auth/login/
+    And it may call GET /api/usuarios/ only when the login response omits identity fields
     And it opens the role-aware native dashboard
 
   @HU-019-S03

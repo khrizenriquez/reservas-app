@@ -1,14 +1,16 @@
 scenarios:
   HU-019-S01:
     operations: [login]
-    implementation: []
-    tests: []
-    status: PLANNED
+    implementation: [src/session/SessionProvider.js]
+    tests: [__tests__/session-provider.test.js]
+    status: PASS
+    evidence: [npm test -- --coverage]
   HU-019-S02:
-    operations: [login]
-    implementation: []
-    tests: []
-    status: PLANNED
+    operations: [login, listUsers]
+    implementation: [src/session/SessionProvider.js, app/access.js, app/portal/_layout.js]
+    tests: [__tests__/session-provider.test.js]
+    status: PASS
+    evidence: [npm test -- --coverage]
   HU-019-S03:
     operations: [getLabAvailability, createReservation]
     implementation: []

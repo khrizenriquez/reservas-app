@@ -44,6 +44,8 @@ describe("Render v1 API client", () => {
       .toEqual(expect.objectContaining({ id: 4, userId: 1, labName: "Lab A", reason: "Examen" }));
     expect(mapAuditLog({ umg_id: 5, umg_user: 1, umg_accion: "crear", umg_modulo: "reservas", umg_descripcion: "Reserva creada", umg_fecha_registro: "2026-01-01" }))
       .toEqual({ id: 5, userId: 1, action: "crear", module: "reservas", description: "Reserva creada", createdAt: "2026-01-01" });
+    expect(mapUser({ data: { usuario: { UMG_ID: 6, UMG_Usuario: "nested@umg.edu.gt", UMG_Rol_Nombre: "Administrador" } } }))
+      .toEqual(expect.objectContaining({ id: 6, username: "nested@umg.edu.gt", roleName: "Administrador" }));
   });
 
   it("sends every published mutation with its Render body and maps its response", async () => {
