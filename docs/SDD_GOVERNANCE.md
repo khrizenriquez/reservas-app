@@ -1,35 +1,13 @@
-# Spec-Driven Development Governance
+# Spec-Driven Delivery Governance
 
-## Core principle
+Specifications define expected behaviour; code and tests implement and prove it. Before any functional change, update the relevant HU-019 scenario, trace row, and design/ADR material when architecture changes.
 
-Specification comes first. No implementation change is valid without explicit mapping to requirement and gate.
+## Required evidence
 
-## Required gates
+1. Render v1 contract verifier passes.
+2. Lint passes.
+3. Jest passes with global coverage above 80%.
+4. Touched traceability rows point to existing implementation and test files.
+5. No secrets, production personal data, or unsupported endpoints are present.
 
-1. Contract check (legacy profile) PASS.
-2. Lint + unit/integration tests PASS.
-3. Build/doctor environment checks PASS.
-4. Functional flow coverage evidence PASS.
-5. Security hygiene PASS (no secrets in repo or prompts).
-
-## Completion criteria
-
-A requirement can be marked PASS only with reproducible evidence.
-
-A requirement outside scope must be EXCLUDED with formal approval and rationale.
-
-Residual backend risks must stay visible and accepted explicitly.
-
-## Required artifacts for each change
-
-- Requirement ID(s)
-- Contract impact statement
-- Traceability update
-- Test evidence
-- Risk notes
-
-## Canonical sources
-
-- `specs/governance/SDD_ADR_IA_CIERRE_100.md`
-- `specs/traceability.yaml`
-- `specs/acceptance/HU-019-mobile-client.feature`
+One todo item equals one focused branch. The branch is pushed only after evidence is green; it is manually merged by the owner, then removed locally before the next branch begins from updated main.

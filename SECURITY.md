@@ -1,34 +1,28 @@
-degradación incompatible de Expo 57 a 53.
 # Security Policy
 
-## Scope
+## Sensitive data
 
-This repository currently stores governance, documentation, and specifications used to build the project from scratch.
+Never commit `.env` files, credentials, passwords, tokens, cookies, signing
+keys, certificates, personal data, or production API responses. Test fixtures
+must use synthetic data only.
 
-## Sensitive data rules
+## Mobile session boundary
 
-Do not commit any of the following:
+Render v1 is the only permitted backend. The mobile app may persist only its
+normalized UI identity in Expo SecureStore. It must never persist passwords,
+tokens, cookies, or complete login/API responses. As Render v1 does not publish
+a secure mobile token contract, UI role checks are not authorization and must not
+be represented as a backend security control.
 
-- `.env` files
-- API keys, tokens, passwords, credentials, or session data
-- signing keys, certificates, or private key material
-- personal data in screenshots, logs, prompts, or test fixtures
+## Network and mutation safety
 
-## Vulnerability reporting
+Use only published Render v1 operations with native `fetch`. Do not introduce a
+proxy, v2 endpoint, request header, cookie flow, or API substitute. Mutations are
+disabled offline and are never queued. API errors must not expose raw backend or
+personal details.
 
-Report security issues through the maintainer private communication channel.
-Do not open public issues with exploit details.
+## Reporting and merge rules
 
-## Merge security requirements
-
-Security-sensitive changes must include:
-
-- human review
-- documented risk assessment
-- verification evidence
-
-Do not merge unresolved critical security findings.
-
-## Dependency and tooling posture
-
-When runtime code and dependency manifests are introduced, add dependency vulnerability checks to the quality gates and fail the pipeline on critical findings unless an explicit, time-bound exception is documented.
+Report vulnerabilities privately to the maintainer. Security-sensitive changes
+need documented risk assessment, human review, and passing contract/lint/tests.
+Unresolved critical findings block merge.

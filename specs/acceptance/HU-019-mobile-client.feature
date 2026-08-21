@@ -1,58 +1,61 @@
 @HU-019 @RF-028 @RN-033
-Feature: Manage laboratory reservations from a secure mobile client
+Feature: Manage laboratory reservations from a native Render v1 mobile client
 
-  @HU-019-S01 @HU-011
-  Scenario: Restore a secure mobile session
-    Given an active institutional user signs in from the mobile client
-    Then the rotating refresh token is stored only in Expo SecureStore
-    And the access token remains only in process memory
+  @HU-019-S01
+  Scenario: Restore the persisted UI identity
+    Given a user previously completed Render v1 login
+    When the app is reopened
+    Then only normalized identity is restored from Expo SecureStore
+    And no password token cookie or full API response is persisted
 
-  @HU-019-S02 @HU-003
-  Scenario: Search availability from a small screen
-    Given an authenticated user provides a valid date and interval
+  @HU-019-S02
+  Scenario: Access the mobile application
+    Given an institutional user enters credentials
+    When login succeeds
+    Then the app calls only POST /api/auth/login/
+    And it opens the role-aware native dashboard
+
+  @HU-019-S03
+  Scenario: Search availability and begin a reservation
+    Given a signed-in user supplies a valid date and interval
     When availability is requested
-    Then free laboratories are shown with text status and a readable time summary
+    Then GET /api/labs/disponibles/ shows free labs with a readable time rail
+    And selection transfers only the documented values to reservation creation
 
-  @HU-019-S03 @HU-001
-  Scenario: Create one reservation
-    Given an available laboratory and valid reason
-    When the user confirms the mobile summary
-    Then one reservation is created with an idempotency key
-
-  @HU-019-S04 @HU-007 @HU-008
-  Scenario: Manage an owned future reservation
-    Given an active future reservation owned by the user
-    Then modification and cancellation actions are available
+  @HU-019-S04
+  Scenario: Create and manage a future reservation
+    Given an available lab and a valid reason
+    Then the app uses only documented list create detail update and cancel operations
+    And a professor receives mutation actions only for own future records
     And cancellation requires native confirmation
 
-  @HU-019-S05 @HU-014
-  Scenario: Open a persistent notification
-    Given a notification contains an allowlisted reservation deep link
-    When the user taps it
-    Then the persistent inbox marks it as read
-    And the owned reservation context opens
+  @HU-019-S05
+  Scenario: Use profile and password change
+    Given a persisted UI identity
+    When the user changes their password
+    Then POST /api/auth/cambiar-contrasena/ is used for that identity only
 
-  @HU-019-S06 @HU-014
-  Scenario: Register Expo Push safely
-    Given the user grants notification permission on a physical device
-    When Expo returns a project-scoped token
-    Then the token is registered for the authenticated user
-    And registration failure does not remove the persistent inbox
+  @HU-019-S06
+  Scenario: Use native administration and user management
+    Given an administrator UI identity
+    Then labs and conditions can use only their published list/create/update operations
+    And users can use only list/create/reset/inactivate operations
+    And professors cannot see administrative mutations
 
   @HU-019-S07
-  Scenario: Prevent offline mutations
-    Given the device loses connectivity
-    Then previously rendered data is identified as stale
-    And create modify cancel and acknowledgement actions are disabled and never queued
+  Scenario: Inspect published audit logs
+    Given a signed-in user provides an audit user ID
+    Then GET /api/logs/ is sent only with documented UMG_User_ID
+    And weekly metrics and lists derive solely from returned records
 
-  @HU-019-S08 @HU-012 @HU-013 @HU-015 @HU-017
-  Scenario: Keep dense administration web-first
-    Given an administrator uses the mobile application
-    Then urgent operational indicators are available from Home
-    And dense users audit and report builders remain in the web portal
+  @HU-019-S08
+  Scenario: Keep connectivity behaviour safe
+    Given the device is offline
+    Then previously read data is identified as stale
+    And every mutation is disabled and never queued
 
   @HU-019-S09
-  Scenario: Use assistive technology
+  Scenario: Complete core journeys accessibly
     Given a screen-reader or large-text user
-    Then navigation controls have meaningful labels and minimum touch targets
-    And errors and loading states are announced without relying only on color
+    Then navigation controls, forms, errors, charts, and dialogs have accessible labels
+    And status is never communicated only by colour

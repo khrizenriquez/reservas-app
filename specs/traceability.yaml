@@ -1,0 +1,46 @@
+scenarios:
+  HU-019-S01:
+    operations: [login]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S02:
+    operations: [login]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S03:
+    operations: [getLabAvailability, createReservation]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S04:
+    operations: [listReservations, createReservation, getReservation, updateReservation, cancelReservation]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S05:
+    operations: [changePassword]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S06:
+    operations: [listLabs, createLab, updateLab, listLabConditions, createLabCondition, updateLabCondition, listUsers, createUser, resetUserPassword, deactivateUser]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S07:
+    operations: [listAuditLogs]
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S08:
+    operations: []
+    implementation: []
+    tests: []
+    status: PLANNED
+  HU-019-S09:
+    operations: []
+    implementation: []
+    tests: []
+    status: PLANNED
