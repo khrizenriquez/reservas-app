@@ -25,3 +25,6 @@ screen states, and role-aware portal navigation.
 handoff, role-scoped upcoming records from the reservations operation, refresh
 and availability actions, localized API failures, and a single offline status
 announcement.
+`__tests__/availability.test.js` verifies strict local date/interval validation,
+the documented availability query, time-rail results, reservation handoff,
+empty/API-error states, and the offline request guard.

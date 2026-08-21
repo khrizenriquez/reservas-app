@@ -41,7 +41,7 @@
 - [x] **06 — `feature/mobile-welcome-home`: deliver the public welcome and dashboard.**
   Recreate the institutional overview, quick actions, upcoming reservations,
   and role-appropriate summary from real Render data.
-- [ ] **07 — `feature/mobile-availability`: deliver availability search.**
+- [x] **07 — `feature/mobile-availability`: deliver availability search.**
   Add date/interval validation, real `GET /api/labs/disponibles/` results,
   time-rail cards, and handoff to the reservation form.
 - [ ] **08 — `feature/mobile-reservations`: deliver the full reservation flow.**

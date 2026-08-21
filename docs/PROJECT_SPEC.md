@@ -43,6 +43,10 @@ backend must enforce authorization.
 - Home uses only the documented reservations list operation and presents up to
   three future records in the current UI role's scope, plus a handoff to
   availability. It never derives fictitious dashboard metrics or records.
+- Availability validates a real ISO date and increasing 24-hour interval before
+  calling the documented available-labs operation. Returned labs use the
+  laboratory time rail and hand off only `labId`, date, start time, and end time
+  to the planned reservation form; it does not pre-create a reservation.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,

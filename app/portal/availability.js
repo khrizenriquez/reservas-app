@@ -1,5 +1,5 @@
-import { FeaturePlaceholder } from "../../src/components/FeaturePlaceholder";
+import { AvailabilityScreen } from "../../src/features/availability/AvailabilityScreen";
 
-export default function AvailabilityScreen() {
-  return <FeaturePlaceholder titleKey="navigation.availability" />;
+export default function PortalAvailabilityScreen() {
+  return <AvailabilityScreen />;
 }

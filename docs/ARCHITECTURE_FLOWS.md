@@ -35,6 +35,10 @@ sequenceDiagram
   records to the authorized UI scope and future dates, and limits the display
   to three. It uses an explicit offline state or stale banner instead of
   substituting local dashboard data.
+- Availability validates date/time input locally, then calls only
+  `getLabAvailability` with `fecha`, `hora_inicio`, and `hora_fin`. Its selected
+  lab route state is limited to `labId`, date, start time, and end time for the
+  subsequent reservation screen.
 - The mobile shell provides bottom navigation, theme and language controls, and
   a native NetInfo-backed offline banner. It does not queue work; future mutation
   screens consume its connectivity context to disable actions before transport.
