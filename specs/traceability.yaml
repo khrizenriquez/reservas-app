@@ -12,10 +12,11 @@ scenarios:
     status: PASS
     evidence: [npm test -- --coverage]
   HU-019-S03:
-    operations: [getLabAvailability, createReservation]
-    implementation: []
-    tests: []
-    status: PLANNED
+    operations: [getLabAvailability]
+    implementation: [src/features/availability/AvailabilityScreen.js, src/features/availability/availabilityForm.js, app/portal/availability.js]
+    tests: [__tests__/availability.test.js]
+    status: PASS
+    evidence: [npm test -- --coverage]
   HU-019-S04:
     operations: [listReservations, createReservation, getReservation, updateReservation, cancelReservation]
     implementation: [src/features/home/HomeDashboard.js, src/features/home/useUpcomingReservations.js]

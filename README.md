@@ -35,6 +35,11 @@ The role-aware Home requests the documented reservations operation, shows at
 most three upcoming records in its authorized UI scope, and provides the
 availability action. It never invents counts, reservations, or availability.
 
+Availability accepts only a real `YYYY-MM-DD` date and an increasing `HH:MM`
+interval before calling the documented availability operation. Its native time
+rail marks the returned laboratories as available, and its reservation handoff
+contains only `labId`, date, start time, and end time.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router
