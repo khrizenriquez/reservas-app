@@ -19,9 +19,10 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S04:
     operations: [listReservations, createReservation, getReservation, updateReservation, cancelReservation]
-    implementation: [src/features/home/HomeDashboard.js, src/features/home/useUpcomingReservations.js]
-    tests: [__tests__/home-welcome.test.js]
-    status: PLANNED
+    implementation: [src/features/reservations/ReservationsScreen.js, src/features/reservations/reservationRules.js, app/portal/reservations.js]
+    tests: [__tests__/reservations.test.js]
+    status: PASS
+    evidence: [npm test -- --coverage]
   HU-019-S05:
     operations: [changePassword]
     implementation: []

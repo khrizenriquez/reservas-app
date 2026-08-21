@@ -47,6 +47,10 @@ backend must enforce authorization.
   calling the documented available-labs operation. Returned labs use the
   laboratory time rail and hand off only `labId`, date, start time, and end time
   to the planned reservation form; it does not pre-create a reservation.
+- Reservations consumes only the published list/create/detail/update/cancel
+  operations. Its form accepts the availability handoff, validates future
+  intervals locally, limits professor mutation controls to own future records,
+  and requires native cancellation confirmation.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,

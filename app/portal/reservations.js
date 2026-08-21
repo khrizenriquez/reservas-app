@@ -1,5 +1,5 @@
-import { FeaturePlaceholder } from "../../src/components/FeaturePlaceholder";
+import { ReservationsScreen } from "../../src/features/reservations/ReservationsScreen";
 
-export default function ReservationsScreen() {
-  return <FeaturePlaceholder titleKey="navigation.reservations" />;
+export default function PortalReservationsScreen() {
+  return <ReservationsScreen />;
 }
