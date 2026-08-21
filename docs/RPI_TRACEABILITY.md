@@ -10,4 +10,5 @@ Every row must include:
 - PLANNED, PASS, or formally approved EXCLUDED status; and
 - reproducible evidence for PASS.
 
-The traceability validation added in the scaffold checks that scenario IDs, operation names, and referenced paths remain valid.
+The scaffold's `npm run traceability` validation checks that scenario IDs map
+one-to-one and that every listed Render operation exists in the pinned contract.

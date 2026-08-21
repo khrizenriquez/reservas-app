@@ -15,7 +15,27 @@ The app reproduces the front's supported mobile surfaces: welcome/access, home, 
 
 ## Delivery
 
-Read design.md, docs/PROJECT_SPEC.md, and todo-list.md. Each numbered todo item is one feature/* or fix/* branch. Run contract, lint, and Jest coverage gates before pushing; the owner performs manual PR merge, after which work restarts from updated main.
+Read design.md, docs/PROJECT_SPEC.md, and todo-list.md. Each numbered todo item is one feature/* or fix/* branch. Run contract, traceability, lint, and Jest coverage gates before pushing; the owner performs manual PR merge, after which work restarts from updated main.
+
+## Run the native scaffold
+
+Use Node 22.13 or later (within Node 22), then install and start the Expo
+development server:
+
+```bash
+npm install
+npm start
+```
+
+Use `npm run ios` or `npm run android` on a machine with the corresponding
+native tooling. The reproducible gates are `npm run check` and `npm run doctor`.
+`npm run build:ios` and `npm run build:android` validate native bundles without
+creating a release build.
+
+Expo's SDK 57 manifest lists React 19.2.3, while the current Expo Router
+dependency tree resolves React 19.2.8. The package intentionally excludes only
+React from Expo's version validator; `npm ls` and Expo Doctor remain required to
+detect actual peer conflicts.
 
 ## Security
 

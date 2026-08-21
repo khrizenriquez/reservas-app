@@ -15,9 +15,10 @@
 ## Required gates for every implementation item
 
 1. `npm run contract`
-2. `npm run lint`
-3. `npm test -- --coverage` with global coverage above 80%
-4. Traceability and the affected docs/specs updated
+2. `npm run traceability`
+3. `npm run lint`
+4. `npm test -- --coverage` with global coverage above 80%
+5. Traceability and the affected docs/specs updated
 
 ## Ordered increments
 
@@ -25,7 +26,7 @@
   Replace legacy/v2 conflicts with Render v1 parity; define screens, role UI,
   all supported operations, offline policy, and branch-by-branch traceability.
   Verification: document reference audit and `git diff --check`.
-- [ ] **02 — `feature/expo-scaffold`: create the runnable native foundation.**
+- [x] **02 — `feature/expo-scaffold`: create the runnable native foundation.**
   Add Expo Router, JavaScript project configuration, ESLint, Jest, coverage,
   scripts, theme tokens, safe-area root layout, and contract test harness.
 - [ ] **03 — `feature/render-contract-client`: bind the complete Render v1 contract.**

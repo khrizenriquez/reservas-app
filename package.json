@@ -1,0 +1,50 @@
+{
+  "name": "reservas-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "engines": {
+    "node": ">=22.13.0 <23"
+  },
+  "expo": {
+    "install": {
+      "exclude": [
+        "react"
+      ]
+    }
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "contract": "node scripts/verify-contract.mjs",
+    "traceability": "node scripts/verify-traceability.mjs",
+    "lint": "expo lint",
+    "test": "jest --coverage --runInBand",
+    "check": "npm run contract && npm run traceability && npm run lint && npm test",
+    "doctor": "expo-doctor",
+    "build:ios": "expo export --platform ios --output-dir /tmp/reservas-app-ios-export",
+    "build:android": "expo export --platform android --output-dir /tmp/reservas-app-android-export"
+  },
+  "dependencies": {
+    "expo": "~57.0.0",
+    "expo-constants": "~57.0.13",
+    "expo-linking": "~57.0.7",
+    "expo-router": "~57.0.15",
+    "expo-secure-store": "~57.0.1",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.8",
+    "react-native": "0.86.2",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^14.0.1",
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "~57.0.1",
+    "expo-doctor": "^1.20.2",
+    "jest": "~29.7.0",
+    "jest-expo": "~57.0.4"
+  }
+}
