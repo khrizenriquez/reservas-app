@@ -9,6 +9,9 @@
 - React local state and Context by default; Zustand only when a documented
   cross-route state need cannot remain simple
 - Expo SecureStore for normalized UI identity only
+- Expo SDK 57, React Native 0.86.2, and React 19.2.8; the React-only Expo
+  validator exclusion is documented because the Router dependency tree requires
+  the compatible 19.2.8 patch
 
 ## Contract boundary
 
@@ -29,6 +32,8 @@ UI navigation; it is not backend authorization.
 ## Quality and delivery
 
 Every branch starts from updated `main`, maps its change to acceptance and
-traceability, and passes `npm run contract`, `npm run lint`, and
-`npm test -- --coverage` before it is pushed for manual merge. Podman may run
-Node tooling only; iOS Simulator and Android Emulator remain host-driven.
+traceability, and passes `npm run contract`, `npm run traceability`,
+`npm run lint`, and `npm test -- --coverage` before it is pushed for manual
+merge. Run `npm run doctor` and the affected `build:ios`/`build:android` export
+when native configuration changes. Podman may run Node tooling only; iOS
+Simulator and Android Emulator remain host-driven.

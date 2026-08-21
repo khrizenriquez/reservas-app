@@ -30,6 +30,10 @@ backend must enforce authorization.
 ## Technical and security rules
 
 - Expo, React Native, Expo Router, JavaScript, native `fetch`, and Jest are required.
+- The native foundation uses Expo SDK 57, React Native 0.86.2, and React 19.2.8.
+  Expo's base manifest presently lists React 19.2.3, but the Router dependency
+  tree requires the compatible 19.2.8 patch; the intentional React-only Expo
+  validator exclusion must not hide `npm ls` or Expo Doctor failures.
 - Persist only normalized `id`, `name`, `email`, and `role` in Expo SecureStore
   across relaunch. Never store a password, token, cookie, or full API response.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,
