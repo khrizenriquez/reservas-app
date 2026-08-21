@@ -3,7 +3,7 @@
 ```mermaid
 flowchart LR
   U["Android or iOS user"] --> A["Expo / React Native app"]
-  A --> S["Session context + SecureStore identity"]
+  A --> S["Theme, language, connectivity, session contexts"]
   A --> C["Render v1 API client"]
   C --> R["Render /api/*"]
 ```
@@ -29,6 +29,9 @@ sequenceDiagram
 - The root and Portal guards wait for restoration and redirect unauthenticated
   users to Access. The password stays in the Access form only for the login
   request and is cleared immediately after success.
+- The mobile shell provides bottom navigation, theme and language controls, and
+  a native NetInfo-backed offline banner. It does not queue work; future mutation
+  screens consume its connectivity context to disable actions before transport.
 - Offline reads are marked stale. Every mutation is blocked before calling Render when connectivity is unavailable; no operation is queued.
 - Admin/professor visibility is checked at navigation level now and at each
   mutation action when those screens are introduced; neither is authorization.

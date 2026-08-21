@@ -36,8 +36,8 @@ describe("SessionProvider", () => {
     expect(normalizeIdentity({ id: 2 })).toBeNull();
     expect(isAdminIdentity(identity)).toBe(true);
     expect(isAdminIdentity({ role: { id: 2, name: "Docente" } })).toBe(false);
-    expect(navigationFor(identity).map((item) => item.key)).toEqual(["home", "availability", "reservations", "profile", "administration", "users", "logs"]);
-    expect(navigationFor({ role: { id: 2, name: "Docente" } }).map((item) => item.key)).toEqual(["home", "availability", "reservations", "profile"]);
+    expect(navigationFor(identity).map((item) => item.key)).toEqual(["home", "availability", "reservations", "administration", "profile", "users", "logs"]);
+    expect(navigationFor({ role: { id: 2, name: "Docente" } }).map((item) => item.key)).toEqual(["home", "availability", "reservations", "administration", "profile"]);
   });
 
   it("restores a password-free identity from SecureStore", async () => {

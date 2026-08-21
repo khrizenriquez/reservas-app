@@ -48,6 +48,10 @@ backend must enforce authorization.
   reservation, and log query parameters, and never sends an authorization
   header or stored credential.
 - Map transport/4xx/5xx responses to localized ES/EN user messages.
+- The shared shell provides Spanish-default/English-selectable copy, light and
+  dark token sets, native connectivity state, non-colour status banners,
+  accessible dialogs, and 44-point navigation controls. It deliberately uses
+  no decorative animation, which satisfies reduced-motion use cases.
 - Read data may be stale offline with a clear banner; all mutations are disabled
   offline and never queued.
 

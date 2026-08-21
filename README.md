@@ -20,6 +20,14 @@ published login operation, then clears it from the form; it is never written to
 storage. Administrative navigation is UI visibility only and does not grant
 backend authorization.
 
+## Shared mobile experience
+
+The shell uses a paper-and-academic-ink token system with a recurring time-rail
+edge on states, dialogs, and navigation. It follows the system appearance until
+the user toggles light/dark mode, starts in Spanish with an English selector,
+and uses native connectivity state to display offline guidance. Mutations must
+remain disabled while offline; no operation is queued.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

@@ -18,3 +18,6 @@ query, mapping, and localized failure behavior.
 `__tests__/session-provider.test.js` proves that SecureStore receives only the
 normalized UI identity, restores it across relaunch, clears it on sign-out, and
 uses the users endpoint only when login omits identity data.
+`__tests__/shared-ux.test.js` verifies theme and language controls, connectivity
+transitions, explicit stale/offline status, accessible dialog semantics, shared
+screen states, and role-aware portal navigation.

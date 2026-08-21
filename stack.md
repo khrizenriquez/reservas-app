@@ -9,6 +9,10 @@
 - React local state and Context by default; Zustand only when a documented
   cross-route state need cannot remain simple
 - Expo SecureStore for normalized UI identity only
+- `@react-native-community/netinfo` for native connectivity state; it gates UI
+  mutations and never queues them
+- Context providers for theme, language, connectivity, and session; no global
+  store is needed at this stage
 - Expo SDK 57, React Native 0.86.2, and React 19.2.8; the React-only Expo
   validator exclusion is documented because the Router dependency tree requires
   the compatible 19.2.8 patch
