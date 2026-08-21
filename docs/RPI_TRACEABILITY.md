@@ -31,3 +31,6 @@ empty/API-error states, and the offline request guard.
 `__tests__/reservations.test.js` verifies list filters, availability handoff,
 create/detail/update/cancel operations, future/ownership UI rules, cancellation
 confirmation, and offline mutation blocking.
+`__tests__/profile.test.js` verifies restored identity presentation, password
+submission for that identity only, clearing the sensitive field, and offline
+request blocking.

@@ -1,5 +1,5 @@
-import { FeaturePlaceholder } from "../../src/components/FeaturePlaceholder";
+import { ProfileScreen } from "../../src/features/profile/ProfileScreen";
 
-export default function ProfileScreen() {
-  return <FeaturePlaceholder titleKey="navigation.profile" />;
+export default function PortalProfileScreen() {
+  return <ProfileScreen />;
 }
