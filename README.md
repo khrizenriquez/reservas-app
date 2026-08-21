@@ -6,6 +6,12 @@ New Android and iOS reservation client built from zero with React Native, Expo, 
 
 The app reproduces the front's supported mobile surfaces: welcome/access, home, availability, reservations, profile, administration, users, and audit logs. Its only backend is Render v1 at https://umg-api-django.onrender.com/api/docs/. Only the pinned /api/* contract in specs/contracts/legacy-openapi.yaml is valid. No v2, JWT/refresh, notifications, reports, proxy, or fabricated endpoint is in scope.
 
+`src/api/renderApi.js` is the single Render boundary. It covers the published
+login, password, users, labs, conditions, availability, reservations, and logs
+operations; it sends no authorization header, excludes credentials, and maps
+transport and HTTP failures to ES/EN-safe messages. Set only the public base
+URL in `.env` from `.env.example`; do not place credentials in environment files.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

@@ -12,3 +12,6 @@ Every row must include:
 
 The scaffold's `npm run traceability` validation checks that scenario IDs map
 one-to-one and that every listed Render operation exists in the pinned contract.
+`__tests__/render-api.test.js` additionally invokes every published operation
+against a mocked transport and verifies the documented path, method, payload,
+query, mapping, and localized failure behavior.
