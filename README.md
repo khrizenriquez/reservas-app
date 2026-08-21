@@ -44,6 +44,10 @@ Reservations consumes Render list/create/detail/update/cancel operations only.
 Professor UI exposes mutations solely for own future records; cancellation uses
 a native confirmation dialog and every mutation is disabled offline.
 
+Profile exposes the restored UI identity read-only and sends a new password only
+to the documented Render password operation for that identity. The password is
+cleared after every request and never persisted.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

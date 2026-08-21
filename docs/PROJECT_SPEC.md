@@ -51,6 +51,9 @@ backend must enforce authorization.
   operations. Its form accepts the availability handoff, validates future
   intervals locally, limits professor mutation controls to own future records,
   and requires native cancellation confirmation.
+- Profile displays the normalized SecureStore identity as read-only and calls
+  the published password route only for that identity. New passwords are cleared
+  after success or failure and are never persisted.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,

@@ -25,9 +25,10 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S05:
     operations: [changePassword]
-    implementation: []
-    tests: []
-    status: PLANNED
+    implementation: [src/features/profile/ProfileScreen.js, app/portal/profile.js]
+    tests: [__tests__/profile.test.js]
+    status: PASS
+    evidence: [npm test -- --coverage]
   HU-019-S06:
     operations: [listLabs, createLab, updateLab, listLabConditions, createLabCondition, updateLabCondition, listUsers, createUser, resetUserPassword, deactivateUser]
     implementation: []
