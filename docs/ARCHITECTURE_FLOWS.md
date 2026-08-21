@@ -26,9 +26,15 @@ sequenceDiagram
 
 - UI screens call feature hooks; hooks call the single operation-level API client.
 - Only normalized identity persists in SecureStore. It is a UI session, not a server authorization claim.
-- The root and Portal guards wait for restoration and redirect unauthenticated
-  users to Access. The password stays in the Access form only for the login
-  request and is cleared immediately after success.
+- The public root is Welcome. Its access action waits for restoration and sends
+  a restored identity to Portal or an unauthenticated user to Access; the
+  Portal guard still redirects unauthenticated deep links to Access. The
+  password stays in the Access form only for the login request and is cleared
+  immediately after success.
+- Home calls `listReservations` through its feature hook, filters the returned
+  records to the authorized UI scope and future dates, and limits the display
+  to three. It uses an explicit offline state or stale banner instead of
+  substituting local dashboard data.
 - The mobile shell provides bottom navigation, theme and language controls, and
   a native NetInfo-backed offline banner. It does not queue work; future mutation
   screens consume its connectivity context to disable actions before transport.

@@ -1,5 +1,5 @@
-import { FeaturePlaceholder } from "../../src/components/FeaturePlaceholder";
+import { HomeDashboard } from "../../src/features/home/HomeDashboard";
 
 export default function PortalScreen() {
-  return <FeaturePlaceholder titleKey="navigation.home" />;
+  return <HomeDashboard />;
 }

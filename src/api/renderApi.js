@@ -33,7 +33,7 @@ export class RenderApiError extends Error {
 
 export function getRenderErrorMessage(error, locale = "es") {
   const language = locale === "en" ? "en" : "es";
-  const code = error instanceof RenderApiError ? error.code : "api.network";
+  const code = error?.code ?? "api.network";
   return errorMessages[language][code] ?? errorMessages[language]["api.network"];
 }
 
