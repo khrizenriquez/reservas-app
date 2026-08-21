@@ -39,10 +39,11 @@ export function navigationFor(identity) {
     { key: "home", href: "/portal" },
     { key: "availability", href: "/portal/availability" },
     { key: "reservations", href: "/portal/reservations" },
+    { key: "administration", href: "/portal/administration" },
     { key: "profile", href: "/portal/profile" }
   ];
   return isAdminIdentity(identity)
-    ? [...shared, { key: "administration", href: "/portal/administration" }, { key: "users", href: "/portal/users" }, { key: "logs", href: "/portal/logs" }]
+    ? [...shared, { key: "users", href: "/portal/users" }, { key: "logs", href: "/portal/logs" }]
     : shared;
 }
 

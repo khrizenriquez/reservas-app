@@ -28,6 +28,7 @@
     "build:android": "expo export --platform android --output-dir /tmp/reservas-app-android-export"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "12.0.1",
     "expo": "~57.0.0",
     "expo-constants": "~57.0.13",
     "expo-linking": "~57.0.7",

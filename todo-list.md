@@ -35,7 +35,7 @@
 - [x] **04 — `feature/mobile-session-access`: implement persistent UI session.**
   Add SecureStore-backed normalized identity, login, sign-out, route guard, and
   role-aware navigation without claiming backend authorization.
-- [ ] **05 — `feature/mobile-shell-theme-i18n`: build native shared UX.**
+- [x] **05 — `feature/mobile-shell-theme-i18n`: build native shared UX.**
   Implement ES/EN copy, light/dark themes, loading/status components, accessible
   dialogs, connectivity state, and the mobile navigation shell.
 - [ ] **06 — `feature/mobile-welcome-home`: deliver the public welcome and dashboard.**
