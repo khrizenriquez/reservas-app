@@ -29,7 +29,7 @@
 - [x] **02 — `feature/expo-scaffold`: create the runnable native foundation.**
   Add Expo Router, JavaScript project configuration, ESLint, Jest, coverage,
   scripts, theme tokens, safe-area root layout, and contract test harness.
-- [ ] **03 — `feature/render-contract-client`: bind the complete Render v1 contract.**
+- [x] **03 — `feature/render-contract-client`: bind the complete Render v1 contract.**
   Implement and test login, password, labs, conditions, availability,
   reservations, users, and logs with mappers and localized errors.
 - [ ] **04 — `feature/mobile-session-access`: implement persistent UI session.**

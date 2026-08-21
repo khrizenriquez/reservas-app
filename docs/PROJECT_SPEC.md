@@ -38,6 +38,10 @@ backend must enforce authorization.
   across relaunch. Never store a password, token, cookie, or full API response.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,
   push, report, or invented endpoint may be used.
+- `src/api/renderApi.js` is the only transport boundary. It maps all 19 published
+  operations to native UI records, permits only documented availability,
+  reservation, and log query parameters, and never sends an authorization
+  header or stored credential.
 - Map transport/4xx/5xx responses to localized ES/EN user messages.
 - Read data may be stale offline with a clear banner; all mutations are disabled
   offline and never queued.

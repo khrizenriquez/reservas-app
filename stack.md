@@ -22,12 +22,13 @@ Kong-only endpoints, notification APIs, reports, or a proxy.
 
 ## Architecture
 
-`Expo Router screen -> feature hook/use case -> Render API client -> mapper -> UI`
+`Expo Router screen -> feature hook/use case -> src/api/renderApi.js -> mapper -> UI`
 
-The API client creates operation-level requests, maps records to UI models, and
-normalizes network, 4xx, and 5xx failures to localized stable error codes. The
-session context restores only normalized identity from SecureStore and controls
-UI navigation; it is not backend authorization.
+The API client creates the 19 published operation-level requests, maps records
+to UI models, and normalizes network, 4xx, and 5xx failures to localized stable
+error codes. It sends no authorization header and keeps credentials out of the
+transport. The session context restores only normalized identity from SecureStore
+and controls UI navigation; it is not backend authorization.
 
 ## Quality and delivery
 
