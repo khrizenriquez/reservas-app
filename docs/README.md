@@ -1,103 +1,15 @@
-# Project Docs Bootstrap (Spec-Driven + ADR + AI Harness)
+# Mobile Documentation
 
-This folder is a clean-start documentation pack to replicate the current project operating model in a new repository.
+The normative sources are specs/product-design.md, specs/acceptance/HU-019-mobile-client.feature, specs/traceability.yaml, specs/api-contract.json, and the pinned Render v1 snapshot. This directory records architecture, governance, RPI, and delivery evidence; it is not a generic template.
 
-## Goal
+| Document | Purpose |
+|---|---|
+| PROJECT_SPEC.md | Screen, role, contract, and security scope |
+| ARCHITECTURE_FLOWS.md | Native app request and delivery flow |
+| SDD_GOVERNANCE.md | Mandatory gates and change rules |
+| RPI_TRACEABILITY.md | Requirement-to-code-and-test model |
+| ADR_REGISTER.md | Active architecture decisions |
+| AI_HARNESS_PLAYBOOK.md | Review and evidence rules |
+| COMMIT_START_CHECKLIST.md | First runnable increment checklist |
 
-Use these docs as the first commit in a new project so implementation starts with:
-
-- clear product scope;
-- executable acceptance criteria;
-- architecture decisions and status;
-- spec-driven development controls;
-- traceability from requirements to code and tests;
-- AI-assisted development guardrails;
-- explicit implementation technology constraints for REST, native async networking, CORS, and lightweight state/validation choices.
-
-## Technology policy baseline
-
-- API layer is REST-first and contract-driven.
-- The mobile client uses native async/await networking and avoids Axios by default.
-- CORS is handled by the backend for browser clients; it is not a mobile-client concern.
-- Keep dependencies lean: minimal local state, optional Zustand for shared stores, and optional Zod for boundary validation.
-- Do not add heavy app-wide state or schema libraries unless the acceptance criteria require them.
-
-## Recommended commit order
-
-1. Commit this `docs/` folder.
-2. Add `specs/` contracts and acceptance assets.
-3. Add CI checks for contract, lint, tests, and build.
-4. Start feature commits mapped to requirement IDs.
-
-## Canonical source mapping
-
-These docs are derived from the current repository governance/spec assets:
-
-- `specs/product-design.md`
-- `specs/acceptance/HU-019-mobile-client.feature`
-- `specs/traceability.yaml`
-- `specs/api-contract.json`
-- `specs/contracts/legacy-openapi.yaml`
-- `specs/governance/ADR_DEPENDENCIAS_Y_VIGENCIA.md`
-- `specs/governance/SDD_ADR_IA_CIERRE_100.md`
-- `specs/governance/AI_DEVELOPMENT_PLAYBOOK.md`
-
-## Files in this folder
-
-- `PROJECT_SPEC.md`: product and technical baseline.
-- `ARCHITECTURE_FLOWS.md`: architecture context and interaction diagrams.
-- `ADR_REGISTER.md`: ADR inventory and active status.
-- `SDD_GOVERNANCE.md`: spec-driven workflow and gates.
-- `RPI_TRACEABILITY.md`: requirement-policy-implementation trace model.
-- `AI_HARNESS_PLAYBOOK.md`: AI process, review, and evidence checklist.
-- `COMMIT_START_CHECKLIST.md`: first-commit readiness and branch flow.
-- `templates/PR_AI_RECORD_TEMPLATE.md`: PR template for AI-assisted changes.
-
-## Usage in a new repo
-
-1. Copy `docs/` as-is.
-2. Replace backend/repository identifiers in `PROJECT_SPEC.md`.
-3. Import or recreate contract and acceptance assets referenced by this pack.
-4. Keep requirement IDs stable; never reuse IDs for different behavior.
-5. Enforce gates before merge.
-
-## Trunk-based rules
-
-Reference model: Atlassian trunk-based development.
-
-- Keep `main` always green and releasable.
-- Use short-lived branches only.
-- Merge small batches at least daily when ready.
-- Delete branches immediately after merge.
-
-## Branch and commit conventions
-
-Branch patterns:
-
-- `feature/<short-topic>`
-- `fix/<short-topic>`
-
-Examples:
-
-- `feature/login`
-- `feature/backend-connectivity`
-- `fix/get-main-dashboard-info`
-
-Commit message style:
-
-- Short, native English, action-oriented.
-- Examples: `add login flow`, `connect dashboard api`, `fix reservation filter`.
-
-## API source of truth
-
-Primary runtime source: `https://umg-api-django.onrender.com/api/docs/`
-
-For deterministic contract checks in-repo, use pinned artifacts under `specs/`.
-
-## Testing gate
-
-Local Jest coverage target must stay above 80% before merge.
-
-## Container note
-
-Podman support applies to reproducible tooling flows (lint, tests, contract checks) once scaffold exists. Native mobile emulators remain host-driven.
+All changes must keep this folder, root docs, and specs aligned.

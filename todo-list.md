@@ -1,56 +1,71 @@
-# Project TODO List
+# Mobile Delivery Todo List
 
-## 0. Alignment checkpoints (must finish first)
+## Fixed decisions
 
-- [ ] Confirm final functional baseline between docs and specs (legacy-only vs token-refresh + notifications model).
-- [ ] Confirm API source remains `https://umg-api-django.onrender.com/api/docs/`.
-- [ ] Confirm mobile scope and endpoint subset in product and implementation docs.
-- [ ] Confirm React Native + Expo + JavaScript as locked stack for this cycle.
+- Build a new Expo/React Native app for Android and iOS; do not wrap or convert
+  the web client.
+- `reservas-front` is the UI and functional reference. Render v1 is the only
+  backend and only published `/api/*` operations may be consumed.
+- Every numbered item is one short-lived branch. After its tests pass: commit,
+  push, wait for the owner's manual merge, then delete the old local branch,
+  pull `main`, and create the next branch from updated `main`.
+- Persist only normalized UI identity in Expo SecureStore. Do not persist
+  passwords, tokens, cookies, or full API responses.
 
-## 1. Governance and architecture readiness
+## Required gates for every implementation item
 
-- [ ] Keep `README.md`, `AGENTS.md`, `SECURITY.md`, `stack.md`, and this file updated.
-- [ ] Keep docs synchronized: ADR register, SDD governance, traceability, AI playbook.
-- [ ] Review and approve architecture flow diagrams in `docs/ARCHITECTURE_FLOWS.md`.
-- [ ] Define acceptance criteria freeze point for first implementation slice.
+1. `npm run contract`
+2. `npm run lint`
+3. `npm test -- --coverage` with global coverage above 80%
+4. Traceability and the affected docs/specs updated
 
-## 2. Repo scaffold from scratch
+## Ordered increments
 
-- [ ] Create app scaffold in a short-lived branch from `main`.
-- [ ] Add package manager config and scripts for lint, tests, and contract checks.
-- [ ] Add minimal project structure for API client, domain, UI routes, and session handling.
-- [ ] Add test harness with Jest and coverage report output.
+- [x] **01 — `feature/mobile-parity-spec`: align the mobile specification.**
+  Replace legacy/v2 conflicts with Render v1 parity; define screens, role UI,
+  all supported operations, offline policy, and branch-by-branch traceability.
+  Verification: document reference audit and `git diff --check`.
+- [ ] **02 — `feature/expo-scaffold`: create the runnable native foundation.**
+  Add Expo Router, JavaScript project configuration, ESLint, Jest, coverage,
+  scripts, theme tokens, safe-area root layout, and contract test harness.
+- [ ] **03 — `feature/render-contract-client`: bind the complete Render v1 contract.**
+  Implement and test login, password, labs, conditions, availability,
+  reservations, users, and logs with mappers and localized errors.
+- [ ] **04 — `feature/mobile-session-access`: implement persistent UI session.**
+  Add SecureStore-backed normalized identity, login, sign-out, route guard, and
+  role-aware navigation without claiming backend authorization.
+- [ ] **05 — `feature/mobile-shell-theme-i18n`: build native shared UX.**
+  Implement ES/EN copy, light/dark themes, loading/status components, accessible
+  dialogs, connectivity state, and the mobile navigation shell.
+- [ ] **06 — `feature/mobile-welcome-home`: deliver the public welcome and dashboard.**
+  Recreate the institutional overview, quick actions, upcoming reservations,
+  and role-appropriate summary from real Render data.
+- [ ] **07 — `feature/mobile-availability`: deliver availability search.**
+  Add date/interval validation, real `GET /api/labs/disponibles/` results,
+  time-rail cards, and handoff to the reservation form.
+- [ ] **08 — `feature/mobile-reservations`: deliver the full reservation flow.**
+  Implement list/filter, detail, create, edit, cancel confirmation, future and
+  ownership UI rules, pagination/list behavior, and offline mutation blocking.
+- [ ] **09 — `feature/mobile-profile-password`: implement profile and password change.**
+  Show restored identity and call the published change-password route.
+- [ ] **10 — `feature/mobile-administration`: deliver labs and conditions.**
+  Provide read surfaces for every role and admin UI create/update flows for the
+  published lab and condition endpoints.
+- [ ] **11 — `feature/mobile-users`: deliver administrator user management.**
+  Implement users list, create, reset password, inactivate, self-inactivation
+  protection, and direct-route role guard.
+- [ ] **12 — `feature/mobile-logs`: deliver audit analytics.** Query the published
+  `UMG_User_ID` log operation and render original, accessible weekly activity,
+  metrics, filters, and list pagination from returned records only.
+- [ ] **13 — `feature/mobile-offline-accessibility`: close resilience and a11y.**
+  Verify stale read states, no queued mutations, screen-reader labels, dynamic
+  type, 44-point targets, focus/announcements, and reduced motion.
+- [ ] **14 — `feature/mobile-release-evidence`: produce Android and iOS evidence.**
+  Add EAS/Expo build instructions, run Android and iOS smoke paths, record gates
+  and manual evidence, and close traceability.
 
-## 3. Contract and quality gates
+## Explicit exclusions
 
-- [ ] Implement contract verification script using canonical OpenAPI artifacts.
-- [ ] Configure lint rules and CI checks.
-- [ ] Enforce Jest coverage > 80% gate in local and CI execution.
-- [ ] Add traceability validation check (requirement IDs, contract op mapping, file existence).
-
-## 4. Podman enablement (applies when scaffold exists)
-
-- [ ] Define Podman image for Node tooling only (lint, contract, tests).
-- [ ] Add simple startup instructions for Podman workflow.
-- [ ] Document explicit non-containerized scope: iOS simulator and Android emulator runtime.
-
-## 5. First feature slices (trunk-based)
-
-- [ ] `feature/login`: login + forced password-change flow baseline.
-- [ ] `feature/backend-connectivity`: API client wiring and core endpoint adapters.
-- [ ] `feature/reservation-core`: availability + create/update/cancel reservation flow.
-- [ ] Keep commits short and action-oriented in native English.
-
-## 6. Verification before each merge
-
-- [ ] Contract check passes.
-- [ ] Lint passes.
-- [ ] Jest passes with coverage > 80%.
-- [ ] Traceability updated for touched requirements.
-- [ ] Docs/specs updated for behavioral or scope changes.
-
-## 7. Open decisions to close now
-
-- [ ] Choose one authoritative auth/session model across all docs.
-- [ ] Decide whether notifications are in-scope for this cycle.
-- [ ] Decide whether Kong is mandatory in local dev or optional.
+No v2 endpoints, JWT/refresh flow, push notifications, reports, fabricated
+pagination parameters, API proxy, browser CORS workarounds, or local substitute
+backend may be added until Render v1 publishes the relevant contract.

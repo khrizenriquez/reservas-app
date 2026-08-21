@@ -1,6 +1,13 @@
 {
-  "source": "khrizenriquez/reservas-front/packages/design-tokens",
-  "themeSha256": "bd7eed67db0d637122d2d2299b8483eb41d3099de27cefee49658c9a52ff5686",
-  "tokenSha256": "06b9e9d2481885937d5b3229b9d59a87640bf4ac1c4838461c841365462bca0f",
-  "generatedTarget": "src/theme/tokens.js"
+  "source": "design.md",
+  "status": "planned-native-token-snapshot",
+  "generatedTarget": "src/theme/tokens.js",
+  "requiredTokens": {
+    "academicNavy": "#17355F",
+    "reservationBlue": "#2376A8",
+    "signalTeal": "#148A7B",
+    "amber": "#D9921E",
+    "danger": "#B74343",
+    "paper": "#F4F1E8"
+  }
 }
