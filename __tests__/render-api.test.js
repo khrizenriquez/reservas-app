@@ -122,6 +122,7 @@ describe("Render v1 API client", () => {
     expect(getRenderErrorMessage(new RenderApiError({ code: "api.forbidden" }), "es")).toBe("No tienes permiso para realizar esta acción.");
     expect(getRenderErrorMessage(new RenderApiError({ code: "api.notFound" }), "en")).toBe("The requested record was not found.");
     expect(getRenderErrorMessage(new RenderApiError({ code: "api.unknown" }), "en")).toBe("Connect to the internet and try again.");
+    expect(getRenderErrorMessage({ code: "api.server" }, "es")).toBe("El servicio no pudo completar la solicitud. Inténtalo pronto.");
     expect(getRenderErrorMessage(new Error("unknown"), "fr")).toBe("Conéctate a internet e inténtalo de nuevo.");
   });
 

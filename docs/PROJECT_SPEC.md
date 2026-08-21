@@ -36,9 +36,13 @@ backend must enforce authorization.
   validator exclusion must not hide `npm ls` or Expo Doctor failures.
 - Persist only normalized `id`, `name`, `email`, and `role` in Expo SecureStore
   across relaunch. Never store a password, token, cookie, or full API response.
-- The root route waits for SecureStore restoration, then directs unauthenticated
-  users to Access and restored identities to Portal. Login may consult the
+- The root route is the public institutional Welcome screen. Its access action
+  sends a restored identity to Portal and every other user to Access; Portal
+  itself remains guarded while SecureStore restores. Login may consult the
   published users list only when its direct response omits an identity.
+- Home uses only the documented reservations list operation and presents up to
+  three future records in the current UI role's scope, plus a handoff to
+  availability. It never derives fictitious dashboard metrics or records.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,

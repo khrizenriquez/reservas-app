@@ -38,7 +38,7 @@
 - [x] **05 — `feature/mobile-shell-theme-i18n`: build native shared UX.**
   Implement ES/EN copy, light/dark themes, loading/status components, accessible
   dialogs, connectivity state, and the mobile navigation shell.
-- [ ] **06 — `feature/mobile-welcome-home`: deliver the public welcome and dashboard.**
+- [x] **06 — `feature/mobile-welcome-home`: deliver the public welcome and dashboard.**
   Recreate the institutional overview, quick actions, upcoming reservations,
   and role-appropriate summary from real Render data.
 - [ ] **07 — `feature/mobile-availability`: deliver availability search.**

@@ -7,8 +7,8 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S02:
     operations: [login, listUsers]
-    implementation: [src/session/SessionProvider.js, app/access.js, app/portal/_layout.js]
-    tests: [__tests__/session-provider.test.js]
+    implementation: [src/session/SessionProvider.js, app/index.js, app/access.js, app/portal/_layout.js, src/features/welcome/WelcomeScreen.js]
+    tests: [__tests__/session-provider.test.js, __tests__/home-welcome.test.js]
     status: PASS
     evidence: [npm test -- --coverage]
   HU-019-S03:
@@ -18,8 +18,8 @@ scenarios:
     status: PLANNED
   HU-019-S04:
     operations: [listReservations, createReservation, getReservation, updateReservation, cancelReservation]
-    implementation: []
-    tests: []
+    implementation: [src/features/home/HomeDashboard.js, src/features/home/useUpcomingReservations.js]
+    tests: [__tests__/home-welcome.test.js]
     status: PLANNED
   HU-019-S05:
     operations: [changePassword]

@@ -21,3 +21,7 @@ uses the users endpoint only when login omits identity data.
 `__tests__/shared-ux.test.js` verifies theme and language controls, connectivity
 transitions, explicit stale/offline status, accessible dialog semantics, shared
 screen states, and role-aware portal navigation.
+`__tests__/home-welcome.test.js` verifies the public native welcome, its access
+handoff, role-scoped upcoming records from the reservations operation, refresh
+and availability actions, localized API failures, and a single offline status
+announcement.

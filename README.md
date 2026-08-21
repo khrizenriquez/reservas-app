@@ -28,6 +28,13 @@ the user toggles light/dark mode, starts in Spanish with an English selector,
 and uses native connectivity state to display offline guidance. Mutations must
 remain disabled while offline; no operation is queued.
 
+The public root is a native institutional welcome: it presents the academic
+planning journey, visual laboratory cards, and a direct access action. A
+restored identity changes that action to Portal without exposing stored data.
+The role-aware Home requests the documented reservations operation, shows at
+most three upcoming records in its authorized UI scope, and provides the
+availability action. It never invents counts, reservations, or availability.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router
