@@ -62,6 +62,11 @@ backend must enforce authorization.
   creates users, resets another user's password with an ephemeral input, and
   confirms inactivation. The current user never receives an inactivation action
   and every user mutation is disabled offline.
+- Logs is an administrator-only direct route. It starts with the restored user
+  ID and permits only the published `UMG_User_ID` query. Weekly/range filters,
+  metrics, module counts, accessible activity bars, and 10/20/50 pagination are
+  local derivations of returned records; no analytics or date-filter endpoint is
+  invented.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,

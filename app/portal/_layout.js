@@ -14,6 +14,7 @@ export default function PortalLayout() {
     <Tabs.Screen name="reservations" options={{ title: "Reservas" }} />
     <Tabs.Screen name="administration" options={{ title: "Administración" }} />
     <Tabs.Screen name="users" options={{ href: null }} />
+    <Tabs.Screen name="logs" options={{ href: null }} />
     <Tabs.Screen name="profile" options={{ title: "Perfil" }} />
   </Tabs>;
 }

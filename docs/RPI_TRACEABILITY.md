@@ -40,3 +40,6 @@ operations for new laboratory and condition records.
 `__tests__/users.test.js` verifies the administrator direct-route guard, Render
 user listing, create/reset/inactivate operations, self-inactivation protection,
 and offline mutation blocking.
+`__tests__/logs.test.js` verifies the administrator direct-route guard, the
+published user-id query, week/range local aggregation, accessible activity
+summary, pagination, period validation, offline handling, and retry behavior.
