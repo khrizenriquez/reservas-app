@@ -87,7 +87,8 @@ backend must enforce authorization.
   Each data screen owns one contextual status banner and the portal header
   renders none. Status and dialog changes announce their meaningful text, text
   uses the platform dynamic-type default, controls keep 44-point targets, and
-  modal transitions are removed for reduced motion.
+  ambiguous icon actions include concise outcome hints. A dialog requests
+  native focus for its title; modal transitions are removed for reduced motion.
 
 ## Acceptance and quality
 

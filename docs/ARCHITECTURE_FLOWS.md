@@ -51,8 +51,10 @@ sequenceDiagram
   through refresh failures, and its screen is the single owner of the status
   banner; the portal header intentionally renders none. Every mutation is
   blocked before calling Render when connectivity is unavailable; no operation
-  is queued. Shared status changes and dialogs announce meaningful text, and
-  dialogs remove their transition when the device enables reduced motion.
+  is queued. Shared status changes and dialogs announce meaningful text;
+  dialogs request native focus for their title and remove their transition when
+  the device enables reduced motion. Ambiguous icon actions expose concise,
+  localized outcome hints.
 - Administration reads labs and conditions from the same Render client as the
   rest of the portal. Admin-only create/edit actions are checked at navigation
   and action level, distinguish new records from records with a Render id, and

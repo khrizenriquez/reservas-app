@@ -14,6 +14,8 @@ import { ThemeProvider, useTheme } from "../src/theme/ThemeProvider";
 const mockRouter = { replace: jest.fn() };
 jest.mock("expo-router", () => ({ useRouter: () => mockRouter }));
 jest.mock("@react-native-community/netinfo", () => ({ __esModule: true, default: { addEventListener: jest.fn() } }));
+jest.mock("../src/accessibility/focusAccessibilityNode", () => ({ focusAccessibilityNode: jest.fn() }));
+const { focusAccessibilityNode: mockFocusAccessibilityNode } = jest.requireMock("../src/accessibility/focusAccessibilityNode");
 
 function Foundation({ children, initialLanguage, initialTheme, initialOnline = true, subscribe }) {
   return <ThemeProvider initialTheme={initialTheme}><LanguageProvider initialLanguage={initialLanguage}><ConnectivityProvider initialOnline={initialOnline} subscribe={subscribe}>{children}</ConnectivityProvider></LanguageProvider></ThemeProvider>;
@@ -99,6 +101,11 @@ describe("shared native experience", () => {
     await result.unmount();
   });
 
+  it("provides outcome hints and moves native focus to an opened dialog", async () => {
+    await render(<Foundation><AccessibleDialog onClose={jest.fn()} title="Confirmar acción" visible><Text>Contenido</Text></AccessibleDialog></Foundation>);
+    expect(mockFocusAccessibilityNode).toHaveBeenCalled();
+  });
+
   it("grounds portal controls in the restored identity without duplicating screen status", async () => {
     const storage = {
       deleteItemAsync: jest.fn().mockResolvedValue(undefined),
@@ -110,6 +117,9 @@ describe("shared native experience", () => {
 
     await screen.findByText("Reservas");
     expect(screen.queryByText("Sin conexión. Los cambios siguen desactivados hasta reconectarte.")).toBeNull();
+    expect(screen.getByRole("button", { name: "Usar tema nocturno" }).props.accessibilityHint).toBe("Cambia la interfaz al tema nocturno.");
+    expect(screen.getByRole("button", { name: "Idioma" }).props.accessibilityHint).toBe("Cambia el idioma de la interfaz.");
+    expect(screen.getByRole("button", { name: "Cerrar sesión" }).props.accessibilityHint).toBe("Cierra la sesión institucional de este dispositivo.");
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Usar tema nocturno" })); });
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Idioma" })); });
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Sign out" })); });

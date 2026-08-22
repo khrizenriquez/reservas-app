@@ -37,7 +37,7 @@ export function HomeDashboard({ apiFactory }) {
       <Text style={styles.eyebrow}>{t("home.greeting")}</Text>
       <Text accessibilityRole="header" style={styles.title}>{isAdmin ? t("home.adminTitle") : t("home.professorTitle")}</Text>
       <Text style={styles.name}>{identity.name}</Text>
-      <View style={styles.sectionHeading}><Text style={styles.sectionTitle}>{t("home.upcoming")}</Text><Pressable accessibilityRole="button" accessibilityLabel={t("home.refresh")} disabled={!isOnline || status === "loading"} onPress={refresh} style={styles.refresh}><Text style={styles.refreshText}>↻</Text></Pressable></View>
+      <View style={styles.sectionHeading}><Text style={styles.sectionTitle}>{t("home.upcoming")}</Text><Pressable accessibilityHint={t("home.refreshHint")} accessibilityRole="button" accessibilityLabel={t("home.refresh")} disabled={!isOnline || status === "loading"} onPress={refresh} style={styles.refresh}><Text style={styles.refreshText}>↻</Text></Pressable></View>
       {status === "loading" ? <ScreenState kind="loading" /> : null}
       {status === "error" ? <ScreenState description={error?.code ? getRenderErrorMessage(error) : t("home.error")} kind="error" onRetry={refresh} title={t("home.error")} /> : null}
       {status === "offline" ? <ScreenState title={t("home.noReservations")} /> : null}

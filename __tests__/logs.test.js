@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react-native";
 import PortalLogsScreen from "../app/portal/logs";
 import { ConnectivityProvider } from "../src/connectivity/ConnectivityProvider";
@@ -42,6 +43,7 @@ describe("audit logs", () => {
     await waitFor(() => expect(api.listAuditLogs).toHaveBeenCalledWith({ userId: "1" }));
     expect(screen.getByLabelText("Métricas de auditoría")).toBeTruthy();
     expect(screen.getByLabelText(/Actividad por día/)).toBeTruthy();
+    expect(StyleSheet.flatten(screen.getByRole("button", { name: "Mostrar: 10" }).props.style).minHeight).toBeGreaterThanOrEqual(44);
     expect(screen.queryByText("Registro 11")).toBeNull();
     await fireEvent.press(screen.getByRole("button", { name: "Siguiente" }));
     expect(await screen.findByText("reservas · Registro 11")).toBeTruthy();

@@ -18,4 +18,4 @@ The only contract is Render v1 /api/*. Native fetch calls login, password, labs,
 
 ## Offline and accessibility
 
-Read-only values can remain visible as stale. Every mutation is disabled offline and never queued. Screen-reader labels, meaningful roles/hints, dynamic text, reduced motion, and non-colour status reinforcement are acceptance requirements.
+Read-only values can remain visible as stale. Every mutation is disabled offline and never queued. Screen-reader labels, meaningful roles and concise hints for ambiguous icon actions, dynamic text, reduced motion, non-colour status reinforcement, and native dialog-title focus are acceptance requirements.

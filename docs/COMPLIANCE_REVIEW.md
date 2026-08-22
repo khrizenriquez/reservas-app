@@ -21,7 +21,7 @@ production release.
 | Render operations | PASS | The front and mobile API clients expose the same 19 business operations. The live schema returned 20 operations, matching the 20 operations in the pinned schema; the extra operation is `GET /api/schema/`, a contract endpoint not consumed by the front. |
 | Contract paths | PASS | `npm run contract` reports 15 Render paths. |
 | Acceptance traceability | PASS | `npm run traceability` reports 9 scenarios and 21 mapped operations. |
-| Quality gates | PASS | `npm run release:verify`: 12 suites, 59 tests, 90.95% statements, 81.12% branches, Expo Doctor 21/21, and successful iOS/Android exports. |
+| Quality gates | PASS | `npm run release:verify`: 13 suites, 63 tests, 90.93% statements, 81.31% branches, Expo Doctor 21/21, and successful iOS/Android exports. |
 | Client data handling | PASS | Static review found the single `src/api/renderApi.js` transport boundary, `credentials: "omit"`, SecureStore-only normalized identity, and no Axios, AsyncStorage, raw `fetch` outside the API client, token, cookie, or local API substitute. |
 | Visual/interaction direction | PASS with gaps below | Native tabs/cards/time rail, ES/EN, light/dark tokens, status text, and role-aware routes are implemented. |
 
@@ -94,14 +94,14 @@ production release.
    portal header with the administration screen and verifies one stale
    announcement after a connectivity loss.
 
-7. **The 44-point target rule is not satisfied everywhere.**
+7. **The 44-point target rule was not satisfied everywhere — resolved.**
    `src/features/administration/AdministrationScreen.js` defines the secondary
    edit control at `minHeight: 40`; `src/features/logs/LogsScreen.js` defines
    page-size controls at `minHeight: 40`. Both are interactive `Pressable`
    controls, while `design.md` requires 44-point minimum targets.
 
-   Action: raise those targets to at least 44 points and add a style-level or
-   rendered-control regression test.
+   Resolution (increment 17): both controls now use `minHeight: 44`; rendered
+   regression tests verify the administration edit and logs page-size controls.
 
 8. **The stale/offline distinction was not reliable after all state changes — resolved.**
    Prior evidence: `useUpcomingReservations` sets its state to `stale` when it retains records
@@ -117,15 +117,17 @@ production release.
    coverage verifies success → failed refresh → offline on the home dashboard
    and success → offline alongside the portal header/data-screen composition.
 
-9. **Accessibility hints/focus and large-text behaviour are not proven.**
+9. **Accessibility hints/focus were incomplete; physical-device validation remains open.**
    Static review found labels and roles, but no `accessibilityHint` in `app/` or
    `src/`, and the dialog only announces its title—it does not explicitly move
    focus to its first actionable element. Existing tests use the React Native
    renderer; they do not exercise TalkBack, VoiceOver, or dynamic type.
 
-   Action: add concise action hints where labels do not communicate the result,
-   manage modal focus according to the native accessibility API, and capture
-   physical-device evidence under the P1 smoke task.
+   Resolution (increment 17): concise localized hints now describe ambiguous
+   icon outcomes, and dialogs request native focus for their title after
+   opening. Unit and component tests cover the bridge and request. TalkBack,
+   VoiceOver, and large-text evidence remain an external P1 device-smoke task;
+   this repository does not infer that evidence from the renderer.
 
 ### P3 — contract/process hygiene
 

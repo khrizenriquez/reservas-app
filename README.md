@@ -35,7 +35,9 @@ the sole owner of its contextual status banner, so the portal header never
 duplicates visual or screen-reader announcements. Status changes and dialogs
 announce their meaningful text to assistive technology, screen text keeps the
 system dynamic-type default, controls retain 44-point minimum targets, and
-dialogs remove their transition when the device requests reduced motion.
+ambiguous icon actions provide concise outcome hints. Dialogs announce and
+request native focus for their title, and remove their transition when the
+device requests reduced motion.
 
 The public root is a native institutional welcome: it presents the academic
 planning journey, visual laboratory cards, and a direct access action. A

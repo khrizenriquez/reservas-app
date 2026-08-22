@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react-native";
 import { ConnectivityProvider } from "../src/connectivity/ConnectivityProvider";
 import { AdministrationScreen } from "../src/features/administration/AdministrationScreen";
@@ -49,6 +50,14 @@ describe("administration", () => {
     await fireEvent.changeText(screen.getByLabelText("Motivo"), "Práctica actualizada");
     await fireEvent.press(screen.getByRole("button", { name: "Guardar condición" }));
     await waitFor(() => expect(api.updateLabCondition).toHaveBeenCalledWith({ id: 3, labId: 2, date: "2099-08-15", startTime: "08:00", endTime: "09:00", type: "Clase", reason: "Práctica actualizada", status: 1 }));
+  });
+  it("keeps secondary administrative actions at the 44-point minimum", async () => {
+    const api = { listLabs: jest.fn().mockResolvedValue(labs), listLabConditions: jest.fn().mockResolvedValue(conditions) };
+    await render(<Foundation><AdministrationScreen apiFactory={() => api} /></Foundation>);
+    const editLab = await screen.findByRole("button", { name: "Modificar laboratorio: Laboratorio de redes" });
+    const editCondition = screen.getByRole("button", { name: "Modificar condición: Clase" });
+    expect(StyleSheet.flatten(editLab.props.style).minHeight).toBeGreaterThanOrEqual(44);
+    expect(StyleSheet.flatten(editCondition.props.style).minHeight).toBeGreaterThanOrEqual(44);
   });
   it("blocks administrative mutations while offline", async () => {
     const api = { listLabs: jest.fn(), listLabConditions: jest.fn() };
