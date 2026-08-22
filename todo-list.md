@@ -73,11 +73,13 @@
   `npm run release:verify`; protect against merges that only have local evidence.
   Verification: workflow syntax, `npm ci --dry-run`, and the full release
   command. Repository branch protection remains an owner setting.
-- [ ] **16 — `fix/connectivity-status`: make read-state status durable and singular.**
+- [x] **16 — `fix/connectivity-status`: make read-state status durable and singular.**
   Retain a successful-read marker through failed refreshes, display `stale` for
   retained records, and render/announce only one offline status per portal view.
   Verification: regression tests for success → offline and success → error →
-  offline, including the portal header plus a data screen.
+  offline, including the portal header plus a data screen; `npm run
+  release:verify` passed with 59 tests, 90.95% statements, 81.12% branches,
+  21/21 Expo Doctor checks, and successful iOS/Android exports.
 - [ ] **17 — `fix/mobile-accessibility-controls`: complete native accessibility controls.**
   Restore the 44-point minimum for every interactive target, add concise hints
   where a label does not describe the outcome, and move dialog focus to a useful

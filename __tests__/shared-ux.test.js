@@ -99,7 +99,7 @@ describe("shared native experience", () => {
     await result.unmount();
   });
 
-  it("grounds portal controls in the restored identity and exposes real offline status", async () => {
+  it("grounds portal controls in the restored identity without duplicating screen status", async () => {
     const storage = {
       deleteItemAsync: jest.fn().mockResolvedValue(undefined),
       getItemAsync: jest.fn().mockResolvedValue(JSON.stringify({ id: 18, name: "Chris", email: "chris@umg.edu.gt", role: { id: 1, name: "Administrador" } })),
@@ -109,7 +109,7 @@ describe("shared native experience", () => {
     await render(<Foundation initialOnline={false}><SessionProvider storage={storage}><PortalHeader /></SessionProvider></Foundation>);
 
     await screen.findByText("Reservas");
-    expect(screen.getByText("Sin conexión. Los cambios siguen desactivados hasta reconectarte.")).toBeTruthy();
+    expect(screen.queryByText("Sin conexión. Los cambios siguen desactivados hasta reconectarte.")).toBeNull();
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Usar tema nocturno" })); });
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Idioma" })); });
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Sign out" })); });

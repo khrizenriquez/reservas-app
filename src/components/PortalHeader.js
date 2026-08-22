@@ -1,15 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useConnectivity } from "../connectivity/ConnectivityProvider";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { useSession } from "../session/SessionProvider";
 import { radius, spacing } from "../theme/tokens";
 import { useTheme } from "../theme/ThemeProvider";
-import { StatusBanner } from "./StatusBanner";
 
 export function PortalHeader() {
   const router = useRouter();
-  const { isOnline } = useConnectivity();
   const { language, setLanguage, t } = useLanguage();
   const { signOut } = useSession();
   const { colors, theme, toggleTheme } = useTheme();
@@ -29,7 +26,6 @@ export function PortalHeader() {
         <Pressable accessibilityRole="button" accessibilityLabel={t("common.signOut")} onPress={exit} style={styles.control}><Text style={styles.controlText}>↗</Text></Pressable>
       </View>
     </View>
-    {!isOnline ? <StatusBanner /> : null}
   </View>;
 }
 

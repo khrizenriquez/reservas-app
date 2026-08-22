@@ -30,7 +30,7 @@ export function UsersScreen({ apiFactory = createRenderApiClient }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [users, setUsers] = useState([]);
-  const [state, setState] = useState({ error: null, status: "loading" });
+  const [state, setState] = useState({ error: null, hasRead: false, status: "loading" });
   const [form, setForm] = useState(emptyForm);
   const [isCreating, setIsCreating] = useState(false);
   const [resetTarget, setResetTarget] = useState(null);
@@ -39,13 +39,13 @@ export function UsersScreen({ apiFactory = createRenderApiClient }) {
 
   const load = useCallback(async () => {
     if (!isOnline) return;
-    setState({ error: null, status: "loading" });
+    setState((current) => ({ ...current, error: null, status: "loading" }));
     try {
       const response = await apiFactory().listUsers();
       setUsers(asList(response));
-      setState({ error: null, status: "success" });
+      setState({ error: null, hasRead: true, status: "success" });
     } catch (error) {
-      setState({ error, status: "error" });
+      setState((current) => ({ ...current, error, status: "error" }));
     }
   }, [apiFactory, isOnline]);
 
@@ -66,7 +66,7 @@ export function UsersScreen({ apiFactory = createRenderApiClient }) {
       await load();
     } catch (error) {
       setForm((current) => ({ ...current, password: "" }));
-      setState({ error, status: "error" });
+      setState((current) => ({ ...current, error, status: "error" }));
     }
   };
 
@@ -79,7 +79,7 @@ export function UsersScreen({ apiFactory = createRenderApiClient }) {
       await load();
     } catch (error) {
       setTemporaryPassword("");
-      setState({ error, status: "error" });
+      setState((current) => ({ ...current, error, status: "error" }));
     }
   };
 
@@ -90,13 +90,13 @@ export function UsersScreen({ apiFactory = createRenderApiClient }) {
       setDeactivateTarget(null);
       await load();
     } catch (error) {
-      setState({ error, status: "error" });
+      setState((current) => ({ ...current, error, status: "error" }));
     }
   };
 
   const errorMessage = getRenderErrorMessage(state.error, language);
   return <View style={styles.screen}>
-    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: state.status === "success", isOnline })} /> : null}
+    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: state.hasRead, isOnline })} /> : null}
     <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.eyebrow}>{t("users.eyebrow")}</Text>
       <Text accessibilityRole="header" style={styles.title}>{t("users.title")}</Text>

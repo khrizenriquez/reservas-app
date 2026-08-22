@@ -47,10 +47,12 @@ sequenceDiagram
   a native NetInfo-backed offline banner. It does not queue work; future mutation
   screens consume its connectivity context to disable actions before transport.
 - A completed offline read is marked stale; a read with no completed result is
-  marked offline. Every mutation is blocked before calling Render when
-  connectivity is unavailable; no operation is queued. Shared status changes
-  and dialogs announce meaningful text, and dialogs remove their transition
-  when the device enables reduced motion.
+  marked offline. Each read feature preserves a durable successful-read marker
+  through refresh failures, and its screen is the single owner of the status
+  banner; the portal header intentionally renders none. Every mutation is
+  blocked before calling Render when connectivity is unavailable; no operation
+  is queued. Shared status changes and dialogs announce meaningful text, and
+  dialogs remove their transition when the device enables reduced motion.
 - Administration reads labs and conditions from the same Render client as the
   rest of the portal. Admin-only create/edit actions are checked at navigation
   and action level, distinguish new records from records with a Render id, and

@@ -44,9 +44,9 @@ export function AvailabilityScreen({ apiFactory = createRenderApiClient }) {
   const { language, t } = useLanguage();
   const { colors } = useTheme();
   const [form, setForm] = useState({ date: "", endTime: "", startTime: "" });
-  const [state, setState] = useState({ criteria: null, error: null, labs: null, status: "idle" });
+  const [state, setState] = useState({ criteria: null, error: null, hasRead: false, labs: null, status: "idle" });
   const styles = makeStyles(colors);
-  const hasRead = state.criteria !== null && state.labs !== null;
+  const hasRead = state.hasRead;
 
   const search = useCallback(async (criteria) => {
     const validationKey = validateAvailabilityCriteria(criteria);
@@ -58,7 +58,7 @@ export function AvailabilityScreen({ apiFactory = createRenderApiClient }) {
     setState((current) => ({ ...current, criteria, error: null, status: "loading" }));
     try {
       const labs = asList(await apiFactory().getLabAvailability({ fecha: criteria.date, hora_inicio: criteria.startTime, hora_fin: criteria.endTime }));
-      setState({ criteria, error: null, labs, status: "success" });
+      setState({ criteria, error: null, hasRead: true, labs, status: "success" });
     } catch (error) {
       setState((current) => ({ ...current, criteria, error, status: "error" }));
     }

@@ -12,11 +12,11 @@ export function selectUpcomingReservations(records, { isAdmin, userId, today = t
 }
 
 export function useUpcomingReservations({ apiFactory = createRenderApiClient, enabled = true, isAdmin, isOnline, userId }) {
-  const [state, setState] = useState({ error: null, reservations: [], status: "loading" });
+  const [state, setState] = useState({ error: null, hasRead: false, reservations: [], status: "loading" });
   const load = useCallback(async () => {
     if (!enabled) return;
     if (!isOnline) {
-      setState((current) => ({ ...current, status: current.reservations.length ? "stale" : "offline" }));
+      setState((current) => ({ ...current, status: current.hasRead ? "stale" : "offline" }));
       return;
     }
 
@@ -24,7 +24,7 @@ export function useUpcomingReservations({ apiFactory = createRenderApiClient, en
     try {
       const api = apiFactory();
       const records = await api.listReservations(isAdmin ? {} : { userId });
-      setState({ error: null, reservations: selectUpcomingReservations(records, { isAdmin, userId }), status: "success" });
+      setState({ error: null, hasRead: true, reservations: selectUpcomingReservations(records, { isAdmin, userId }), status: "success" });
     } catch (error) {
       setState((current) => ({ ...current, error, status: "error" }));
     }

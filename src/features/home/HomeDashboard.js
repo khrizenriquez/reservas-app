@@ -26,13 +26,13 @@ export function HomeDashboard({ apiFactory }) {
   const { t } = useLanguage();
   const { colors } = useTheme();
   const { identity, isAdmin, isReady } = useSession();
-  const { error, refresh, reservations, status } = useUpcomingReservations({ apiFactory, enabled: Boolean(identity), isAdmin, isOnline, userId: identity?.id });
+  const { error, hasRead, refresh, reservations, status } = useUpcomingReservations({ apiFactory, enabled: Boolean(identity), isAdmin, isOnline, userId: identity?.id });
   const styles = makeStyles(colors);
 
   if (!isReady || !identity) return <View style={styles.screen}><ScreenState kind="loading" /></View>;
 
   return <View style={styles.screen}>
-    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: status === "success", isOnline })} /> : null}
+    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead, isOnline })} /> : null}
     <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.eyebrow}>{t("home.greeting")}</Text>
       <Text accessibilityRole="header" style={styles.title}>{isAdmin ? t("home.adminTitle") : t("home.professorTitle")}</Text>

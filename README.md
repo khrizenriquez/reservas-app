@@ -28,8 +28,11 @@ the user toggles light/dark mode, starts in Spanish with an English selector,
 and uses native connectivity state to display offline guidance. Mutations must
 remain disabled while offline; no operation is queued.
 
-Completed read results remain visible as explicitly stale when connectivity is
-lost; an unread surface instead reports offline. Status changes and dialogs
+Completed read results, including an empty result, retain a durable successful
+read marker and remain explicitly stale when connectivity is lost after a
+failed refresh; an unread surface instead reports offline. Each data screen is
+the sole owner of its contextual status banner, so the portal header never
+duplicates visual or screen-reader announcements. Status changes and dialogs
 announce their meaningful text to assistive technology, screen text keeps the
 system dynamic-type default, controls retain 44-point minimum targets, and
 dialogs remove their transition when the device requests reduced motion.

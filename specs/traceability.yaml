@@ -43,8 +43,8 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S08:
     operations: []
-    implementation: [src/connectivity/readState.js, src/accessibility/useReducedMotion.js, src/components/AccessibleDialog.js, src/components/StatusBanner.js, src/components/ScreenState.js]
-    tests: [__tests__/offline-accessibility.test.js, __tests__/shared-ux.test.js]
+    implementation: [src/connectivity/readState.js, src/features/home/useUpcomingReservations.js, src/components/PortalHeader.js, src/accessibility/useReducedMotion.js, src/components/AccessibleDialog.js, src/components/StatusBanner.js, src/components/ScreenState.js]
+    tests: [__tests__/home-welcome.test.js, __tests__/offline-accessibility.test.js, __tests__/shared-ux.test.js]
     status: PASS
     evidence: [npm test -- --coverage]
   HU-019-S09:

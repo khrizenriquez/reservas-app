@@ -35,7 +35,7 @@ export function LogsScreen({ apiFactory = createRenderApiClient }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [logs, setLogs] = useState([]);
-  const [state, setState] = useState({ error: null, status: "loading" });
+  const [state, setState] = useState({ error: null, hasRead: false, status: "loading" });
   const [userId, setUserId] = useState(String(identity?.id ?? ""));
   const [draft, setDraft] = useState({ end: "", mode: "week", start: "", week: "" });
   const [period, setPeriod] = useState({ end: "", mode: "week", start: "", week: "" });
@@ -46,16 +46,16 @@ export function LogsScreen({ apiFactory = createRenderApiClient }) {
   const load = useCallback(async (nextUserId) => {
     if (!isOnline) return;
     const requestedUserId = String(nextUserId ?? "").trim();
-    if (!requestedUserId) { setState({ error: "required", status: "error" }); return; }
+    if (!requestedUserId) { setState((current) => ({ ...current, error: "required", status: "error" })); return; }
     setUserId(requestedUserId);
-    setState({ error: null, status: "loading" });
+    setState((current) => ({ ...current, error: null, status: "loading" }));
     try {
       const response = await apiFactory().listAuditLogs({ userId: requestedUserId });
       setLogs(asList(response));
       setPage(1);
-      setState({ error: null, status: "success" });
+      setState({ error: null, hasRead: true, status: "success" });
     } catch (error) {
-      setState({ error, status: "error" });
+      setState((current) => ({ ...current, error, status: "error" }));
     }
   }, [apiFactory, isOnline]);
 
@@ -85,7 +85,7 @@ export function LogsScreen({ apiFactory = createRenderApiClient }) {
   };
 
   return <View style={styles.screen}>
-    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: state.status === "success", isOnline })} /> : null}
+    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: state.hasRead, isOnline })} /> : null}
     <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.eyebrow}>{t("logs.eyebrow")}</Text><Text accessibilityRole="header" style={styles.title}>{t("logs.title")}</Text><Text style={styles.description}>{t("logs.description")}</Text>
       <View style={styles.filters}><Field label={t("logs.userId")} onChangeText={setUserId} value={userId} /><Pressable accessibilityRole="button" accessibilityLabel={t("logs.load")} disabled={!isOnline} onPress={() => load(userId)} style={styles.primary}><Text style={styles.primaryText}>{t("logs.load")}</Text></Pressable></View>
