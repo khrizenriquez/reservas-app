@@ -35,8 +35,10 @@ production release.
    merge can bypass contract, lint, traceability, test coverage, Doctor, and
    native export checks.
 
-   Action: add a GitHub Actions workflow that runs Node 22.13, `npm ci`,
-   `npm run release:verify`, and fails on every gate.
+   Status: resolved in increment 15 with `.github/workflows/release-gates.yml`.
+   It runs Node 22.13, `npm ci`, and `npm run release:verify` on pull requests
+   and pushes to `main`. The repository owner must still configure GitHub branch
+   protection to require this check before merge.
 
 2. **The app is not yet a distributable signed Android/iOS release.**
    `app.json` has no `android.package` or `ios.bundleIdentifier`; the current
