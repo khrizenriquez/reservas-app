@@ -1,4 +1,6 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { AccessibilityInfo, Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
+import { useReducedMotion } from "../accessibility/useReducedMotion";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { radius, spacing } from "../theme/tokens";
 import { useTheme } from "../theme/ThemeProvider";
@@ -6,10 +8,12 @@ import { useTheme } from "../theme/ThemeProvider";
 export function AccessibleDialog({ children, onClose, title, visible }) {
   const { colors } = useTheme();
   const { t } = useLanguage();
+  const reducedMotion = useReducedMotion();
   const styles = makeStyles(colors);
-  return <Modal accessibilityViewIsModal animationType="fade" onRequestClose={onClose} transparent visible={visible}>
+  useEffect(() => { if (visible) AccessibilityInfo.announceForAccessibility?.(title); }, [title, visible]);
+  return <Modal accessibilityViewIsModal animationType={reducedMotion ? "none" : "fade"} onRequestClose={onClose} transparent visible={visible}>
     <View style={styles.backdrop}>
-      <View accessibilityRole="alert" accessibilityLabel={title} style={styles.dialog}>
+      <View accessibilityLiveRegion="polite" accessibilityRole="alert" accessibilityLabel={title} style={styles.dialog}>
         <View style={styles.rail} />
         <View style={styles.content}>
           <Text accessibilityRole="header" style={styles.title}>{title}</Text>

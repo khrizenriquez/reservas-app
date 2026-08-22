@@ -82,6 +82,10 @@ backend must enforce authorization.
   no decorative animation, which satisfies reduced-motion use cases.
 - Read data may be stale offline with a clear banner; all mutations are disabled
   offline and never queued.
+- A completed read is retained as stale after connectivity loss, while a screen
+  without a completed read reports offline. Status and dialog changes announce
+  their meaningful text, text uses the platform dynamic-type default, controls
+  keep 44-point targets, and modal transitions are removed for reduced motion.
 
 ## Acceptance and quality
 

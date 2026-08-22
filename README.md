@@ -28,6 +28,12 @@ the user toggles light/dark mode, starts in Spanish with an English selector,
 and uses native connectivity state to display offline guidance. Mutations must
 remain disabled while offline; no operation is queued.
 
+Completed read results remain visible as explicitly stale when connectivity is
+lost; an unread surface instead reports offline. Status changes and dialogs
+announce their meaningful text to assistive technology, screen text keeps the
+system dynamic-type default, controls retain 44-point minimum targets, and
+dialogs remove their transition when the device requests reduced motion.
+
 The public root is a native institutional welcome: it presents the academic
 planning journey, visual laboratory cards, and a direct access action. A
 restored identity changes that action to Portal without exposing stored data.
