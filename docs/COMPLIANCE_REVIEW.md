@@ -21,7 +21,7 @@ production release.
 | Render operations | PASS | The front and mobile API clients expose the same 19 business operations. The live schema returned 20 operations, matching the 20 operations in the pinned schema; the extra operation is `GET /api/schema/`, a contract endpoint not consumed by the front. |
 | Contract paths | PASS | `npm run contract` reports 15 Render paths. |
 | Acceptance traceability | PASS | `npm run traceability` reports 9 scenarios and 21 mapped operations. |
-| Quality gates | PASS | `npm run release:verify`: 12 suites, 58 tests, 91.60% statements, 80.83% branches, Expo Doctor 21/21, and successful iOS/Android exports. |
+| Quality gates | PASS | `npm run release:verify`: 12 suites, 59 tests, 90.95% statements, 81.12% branches, Expo Doctor 21/21, and successful iOS/Android exports. |
 | Client data handling | PASS | Static review found the single `src/api/renderApi.js` transport boundary, `credentials: "omit"`, SecureStore-only normalized identity, and no Axios, AsyncStorage, raw `fetch` outside the API client, token, cookie, or local API substitute. |
 | Visual/interaction direction | PASS with gaps below | Native tabs/cards/time rail, ES/EN, light/dark tokens, status text, and role-aware routes are implemented. |
 
@@ -82,16 +82,17 @@ production release.
 
 ### P2 — product/accessibility correctness gaps
 
-6. **Offline status is duplicated and can be announced twice.**
-   `app/portal/_layout.js` renders `PortalHeader` for every portal screen;
+6. **Offline status was duplicated and could be announced twice — resolved.**
+   Prior evidence: `app/portal/_layout.js` renders `PortalHeader` for every portal screen;
    `src/components/PortalHeader.js` renders `StatusBanner` offline. Each data
    screen also renders its own `StatusBanner`. Because the banner has
    `accessibilityRole="alert"` and calls `announceForAccessibility`, one
    connectivity loss can create duplicated visual and screen-reader status.
 
-   Action: choose one global status-banner owner or make the header receive the
-   screen state without rendering a second banner; add an integration test with
-   the portal layout and an offline feature screen.
+   Resolution (increment 16): `PortalHeader` no longer renders a status banner;
+   every data screen owns its contextual banner. The regression test composes a
+   portal header with the administration screen and verifies one stale
+   announcement after a connectivity loss.
 
 7. **The 44-point target rule is not satisfied everywhere.**
    `src/features/administration/AdministrationScreen.js` defines the secondary
@@ -102,8 +103,8 @@ production release.
    Action: raise those targets to at least 44 points and add a style-level or
    rendered-control regression test.
 
-8. **The stale/offline distinction is not reliable after all state changes.**
-   `useUpcomingReservations` sets its state to `stale` when it retains records
+8. **The stale/offline distinction was not reliable after all state changes — resolved.**
+   Prior evidence: `useUpcomingReservations` sets its state to `stale` when it retains records
    offline, but `HomeDashboard` derives `hasRead` from `status === "success"`.
    It therefore labels retained home records as offline, not stale. The
    reservations, administration, users, and logs screens similarly derive the
@@ -111,9 +112,10 @@ production release.
    flag, so retained results after a failed refresh can also be labelled
    offline.
 
-   Action: maintain `hasRead` independently of the transient request status in
-   every read feature; test success → failed refresh → offline and success →
-   offline transitions.
+   Resolution (increment 16): read features now retain `hasRead` independently
+   of transient request status (including empty successful results). Regression
+   coverage verifies success → failed refresh → offline on the home dashboard
+   and success → offline alongside the portal header/data-screen composition.
 
 9. **Accessibility hints/focus and large-text behaviour are not proven.**
    Static review found labels and roles, but no `accessibilityHint` in `app/` or

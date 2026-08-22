@@ -23,8 +23,8 @@ transitions, explicit stale/offline status, accessible dialog semantics, shared
 screen states, and role-aware portal navigation.
 `__tests__/home-welcome.test.js` verifies the public native welcome, its access
 handoff, role-scoped upcoming records from the reservations operation, refresh
-and availability actions, localized API failures, and a single offline status
-announcement.
+and availability actions, localized API failures, and that a completed home
+read remains stale after a failed refresh followed by connectivity loss.
 `__tests__/availability.test.js` verifies strict local date/interval validation,
 the documented availability query, time-rail results, reservation handoff,
 empty/API-error states, and the offline request guard.
@@ -44,9 +44,10 @@ and offline mutation blocking.
 published user-id query, week/range local aggregation, accessible activity
 summary, pagination, period validation, offline handling, and retry behavior.
 `__tests__/offline-accessibility.test.js` verifies that read data persists as
-stale after a connectivity loss, unread states remain explicitly offline, and
-shared status/dialog announcements and reduced-motion dialog transitions are
-applied without enabling any offline mutation queue.
+stale after a connectivity loss, the portal header plus a data screen emit one
+status announcement, unread states remain explicitly offline, and shared
+status/dialog announcements and reduced-motion dialog transitions are applied
+without enabling any offline mutation queue.
 `HU-019-S09` is supported by the shared UX and accessibility tests, plus the
 reproducible Android/iOS bundle evidence in `docs/RELEASE_EVIDENCE.md`. Manual
 device smoke evidence is never inferred from an export; its current owner waiver

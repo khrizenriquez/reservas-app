@@ -2,6 +2,7 @@ import { AccessibilityInfo, Text, View } from "react-native";
 import { act, render, screen } from "@testing-library/react-native";
 import { AccessibleDialog } from "../src/components/AccessibleDialog";
 import { StatusBanner } from "../src/components/StatusBanner";
+import { PortalHeader } from "../src/components/PortalHeader";
 import { useReducedMotion } from "../src/accessibility/useReducedMotion";
 import { ConnectivityProvider } from "../src/connectivity/ConnectivityProvider";
 import { readStatusFor } from "../src/connectivity/readState";
@@ -41,12 +42,13 @@ describe("offline and accessibility closure", () => {
     const subscribe = jest.fn((next) => { listener = next; return unsubscribe; });
     const api = { listLabConditions: jest.fn().mockResolvedValue([]), listLabs: jest.fn().mockResolvedValue([{ id: 2, name: "Laboratorio de redes", status: 1 }]) };
     AccessibilityInfo.announceForAccessibility = jest.fn();
-    await render(<Foundation subscribe={subscribe}><AdministrationScreen apiFactory={() => api} /></Foundation>);
+    await render(<Foundation subscribe={subscribe}><View><PortalHeader /><AdministrationScreen apiFactory={() => api} /></View></Foundation>);
     expect(await screen.findByText("Laboratorio de redes")).toBeTruthy();
     await act(async () => { listener(false); });
     expect(await screen.findByText("Mostrando información leída anteriormente. Actualiza al reconectarte.")).toBeTruthy();
     expect(screen.getByText("Laboratorio de redes")).toBeTruthy();
     expect(AccessibilityInfo.announceForAccessibility).toHaveBeenCalledWith("Mostrando información leída anteriormente. Actualiza al reconectarte.");
+    expect(AccessibilityInfo.announceForAccessibility).toHaveBeenCalledTimes(1);
     expect(unsubscribe).not.toHaveBeenCalled();
   });
 

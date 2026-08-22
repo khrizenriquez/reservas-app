@@ -17,8 +17,8 @@ const storageFor = (identity = null) => ({
   setItemAsync: jest.fn()
 });
 
-function Foundation({ children, identity, online = true }) {
-  return <ThemeProvider initialTheme="light"><LanguageProvider><ConnectivityProvider initialOnline={online} subscribe={() => jest.fn()}><SessionProvider storage={storageFor(identity)}>{children}</SessionProvider></ConnectivityProvider></LanguageProvider></ThemeProvider>;
+function Foundation({ children, identity, online = true, subscribe = () => jest.fn() }) {
+  return <ThemeProvider initialTheme="light"><LanguageProvider><ConnectivityProvider initialOnline={online} subscribe={subscribe}><SessionProvider storage={storageFor(identity)}>{children}</SessionProvider></ConnectivityProvider></LanguageProvider></ThemeProvider>;
 }
 
 describe("welcome and home", () => {
@@ -69,6 +69,26 @@ describe("welcome and home", () => {
     await result.rerender(<Foundation key="offline" identity={identity} online={false}><HomeDashboard apiFactory={() => offlineApi} /></Foundation>);
     expect(await screen.findByText("Sin conexión. Los cambios siguen desactivados hasta reconectarte.")).toBeTruthy();
     expect(offlineApi.listReservations).not.toHaveBeenCalled();
+  });
+
+  it("keeps a completed home read marked as stale after a failed refresh and going offline", async () => {
+    let listener;
+    const subscribe = jest.fn((next) => { listener = next; return jest.fn(); });
+    const identity = { id: 2, name: "Ana Docente", email: "ana@umg.edu.gt", role: { id: 2, name: "Docente" } };
+    const api = {
+      listReservations: jest.fn()
+        .mockResolvedValueOnce([{ id: 1, userId: 2, labName: "Lab A", date: "2099-08-15", startTime: "08:00", endTime: "09:00" }])
+        .mockRejectedValueOnce({ code: "api.server" })
+    };
+
+    await render(<Foundation identity={identity} subscribe={subscribe}><HomeDashboard apiFactory={() => api} /></Foundation>);
+    expect(await screen.findByText("Lab A")).toBeTruthy();
+    await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Actualizar reservas" })); });
+    expect(await screen.findByText("No pudimos cargar las reservas.")).toBeTruthy();
+    await act(async () => { listener(false); });
+
+    expect(await screen.findByText("Mostrando información leída anteriormente. Actualiza al reconectarte.")).toBeTruthy();
+    expect(screen.getByText("Lab A")).toBeTruthy();
   });
 
   it("presents the public academic welcome and routes access according to restored identity", async () => {
