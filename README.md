@@ -48,6 +48,12 @@ Profile exposes the restored UI identity read-only and sends a new password only
 to the documented Render password operation for that identity. The password is
 cleared after every request and never persisted.
 
+Administration exposes Render laboratories and conditions to every signed-in UI
+role. Only the normalized Administrator role can open the native create/edit
+dialogs, which call the documented lab and condition operations. Those controls
+are disabled offline; this visibility is guidance only and never substitutes
+for Render authorization.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

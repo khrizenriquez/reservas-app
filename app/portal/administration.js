@@ -1,5 +1,5 @@
-import { FeaturePlaceholder } from "../../src/components/FeaturePlaceholder";
+import { AdministrationScreen } from "../../src/features/administration/AdministrationScreen";
 
-export default function AdministrationScreen() {
-  return <FeaturePlaceholder titleKey="navigation.administration" />;
+export default function PortalAdministrationScreen() {
+  return <AdministrationScreen />;
 }

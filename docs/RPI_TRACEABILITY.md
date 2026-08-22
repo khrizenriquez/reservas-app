@@ -34,3 +34,7 @@ confirmation, and offline mutation blocking.
 `__tests__/profile.test.js` verifies restored identity presentation, password
 submission for that identity only, clearing the sensitive field, and offline
 request blocking.
+`__tests__/administration.test.js` verifies that labs and conditions are
+readable to a professor, while an administrator uses the published create
+operations for new laboratory and condition records. Update and user-management
+coverage is completed in the next delivery increment.

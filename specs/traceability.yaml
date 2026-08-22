@@ -31,8 +31,8 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S06:
     operations: [listLabs, createLab, updateLab, listLabConditions, createLabCondition, updateLabCondition, listUsers, createUser, resetUserPassword, deactivateUser]
-    implementation: []
-    tests: []
+    implementation: [src/features/administration/AdministrationScreen.js, app/portal/administration.js]
+    tests: [__tests__/administration.test.js]
     status: PLANNED
   HU-019-S07:
     operations: [listAuditLogs]
