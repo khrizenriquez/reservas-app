@@ -150,13 +150,18 @@ production release.
 
 ## Recommended delivery order
 
-1. Add CI enforcement and a non-breaking dependency-upgrade plan.
-2. Fix duplicated status announcements, 44-point targets, and durable stale
-   reads; add regression tests.
-3. Define timezone/future semantics and test them.
-4. Obtain Render authorization work and a reviewed schema-drift policy.
-5. Configure approved EAS identities/credentials, build signed previews, and
-   replace the manual-smoke waiver with device evidence.
+The actionable increments are tracked in `todo-list.md` as 15 through 21:
+
+1. CI release gates.
+2. Durable/singular connectivity status.
+3. Native accessibility controls.
+4. Guatemala-time future reservation rules.
+5. Expo dependency security upgrade.
+6. Semantic Render contract drift verification.
+7. External backend and signed-device prerequisites.
+
+Items 15 through 20 are repository-owned; item 21 cannot close until the
+backend and release owners provide the necessary authority and evidence.
 
 Until P1 is cleared or explicitly accepted, describe the project as a
 **verified native development candidate**, not as a production-ready mobile

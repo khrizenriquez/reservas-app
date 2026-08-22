@@ -68,16 +68,36 @@
 
 ## Post-release remediation identified by compliance audit
 
-- [ ] Add CI enforcement for contract, traceability, lint, coverage, Doctor, and
-  Android/iOS exports.
-- [ ] Resolve the audited Expo/Metro dependency vulnerabilities through a tested
-  SDK migration; do not use a forced audit fix without review.
-- [ ] Remove duplicate offline announcements, restore 44-point target parity,
-  and preserve durable stale-read state after failed refreshes.
-- [ ] Define institutional-timezone future-reservation behaviour and add tests.
-- [ ] Obtain backend authorization enforcement, approved EAS identifiers and
-  credentials, signed platform artifacts, and real Android/iOS accessibility
-  smoke evidence.
+- [ ] **15 — `feature/ci-release-gates`: enforce the mandatory gates in CI.**
+  Add a GitHub Actions workflow with Node 22.13, `npm ci`, and
+  `npm run release:verify`; protect against merges that only have local evidence.
+  Verification: workflow syntax/lockfile install and the full release command.
+- [ ] **16 — `fix/connectivity-status`: make read-state status durable and singular.**
+  Retain a successful-read marker through failed refreshes, display `stale` for
+  retained records, and render/announce only one offline status per portal view.
+  Verification: regression tests for success → offline and success → error →
+  offline, including the portal header plus a data screen.
+- [ ] **17 — `fix/mobile-accessibility-controls`: complete native accessibility controls.**
+  Restore the 44-point minimum for every interactive target, add concise hints
+  where a label does not describe the outcome, and move dialog focus to a useful
+  native element. Verification: component tests and the manual device checklist.
+- [ ] **18 — `fix/reservation-timezone`: define future reservations in Guatemala time.**
+  Compare the combined date/time in `America/Guatemala` before exposing upcoming,
+  edit, or cancel actions; cover today-before-now, today-after-now, and the
+  UTC-date boundary. Verification: deterministic rule and dashboard tests.
+- [ ] **19 — `fix/expo-security-upgrade`: resolve audited Expo/Metro vulnerabilities.**
+  Upgrade through Expo-compatible versions, regenerate the lockfile, re-run all
+  gates, and do not use `npm audit fix --force`. Verification: zero high runtime
+  audit findings or a documented vendor exception approved by the maintainer.
+- [ ] **20 — `fix/render-contract-drift`: automate semantic Render schema drift review.**
+  Compare the live schema with the pinned contract while ignoring generated
+  examples, then fail on path/method/request/response changes. Verification:
+  deterministic fixture tests and a live read-only check.
+- [ ] **21 — external release prerequisites: obtain backend authorization and signed-device evidence.**
+  Render owners must enforce authentication/ownership; release owners must
+  approve package identifiers and credentials, create signed Android/iOS builds,
+  and replace the manual smoke waiver with device, TalkBack/VoiceOver, and
+  large-text evidence. This is blocked outside this repository.
 
 ## Explicit exclusions
 
