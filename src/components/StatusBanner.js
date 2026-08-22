@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { AccessibilityInfo, StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { spacing } from "../theme/tokens";
 import { useTheme } from "../theme/ThemeProvider";
@@ -10,6 +11,7 @@ export function StatusBanner({ status = "offline" }) {
   const text = t(isOffline ? "connection.offline" : "connection.stale");
   const color = isOffline ? colors.warning : colors.action;
   const styles = makeStyles(colors, color);
+  useEffect(() => { AccessibilityInfo.announceForAccessibility?.(text); }, [text]);
   return <View accessibilityRole="alert" accessibilityLiveRegion="polite" style={styles.banner}><View style={styles.mark} /><Text style={styles.text}>{text}</Text></View>;
 }
 

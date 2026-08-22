@@ -4,6 +4,7 @@ import { getRenderErrorMessage } from "../../api/renderApi";
 import { StatusBanner } from "../../components/StatusBanner";
 import { ScreenState } from "../../components/ScreenState";
 import { useConnectivity } from "../../connectivity/ConnectivityProvider";
+import { readStatusFor } from "../../connectivity/readState";
 import { useLanguage } from "../../i18n/LanguageProvider";
 import { useSession } from "../../session/SessionProvider";
 import { radius, spacing } from "../../theme/tokens";
@@ -31,7 +32,7 @@ export function HomeDashboard({ apiFactory }) {
   if (!isReady || !identity) return <View style={styles.screen}><ScreenState kind="loading" /></View>;
 
   return <View style={styles.screen}>
-    {!isOnline ? <StatusBanner status={reservations.length ? "stale" : "offline"} /> : null}
+    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: status === "success", isOnline })} /> : null}
     <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.eyebrow}>{t("home.greeting")}</Text>
       <Text accessibilityRole="header" style={styles.title}>{isAdmin ? t("home.adminTitle") : t("home.professorTitle")}</Text>

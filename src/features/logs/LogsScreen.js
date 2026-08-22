@@ -4,6 +4,7 @@ import { createRenderApiClient, getRenderErrorMessage } from "../../api/renderAp
 import { ScreenState } from "../../components/ScreenState";
 import { StatusBanner } from "../../components/StatusBanner";
 import { useConnectivity } from "../../connectivity/ConnectivityProvider";
+import { readStatusFor } from "../../connectivity/readState";
 import { useLanguage } from "../../i18n/LanguageProvider";
 import { useSession } from "../../session/SessionProvider";
 import { radius, spacing } from "../../theme/tokens";
@@ -84,7 +85,7 @@ export function LogsScreen({ apiFactory = createRenderApiClient }) {
   };
 
   return <View style={styles.screen}>
-    {!isOnline ? <StatusBanner status="offline" /> : null}
+    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: state.status === "success", isOnline })} /> : null}
     <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.eyebrow}>{t("logs.eyebrow")}</Text><Text accessibilityRole="header" style={styles.title}>{t("logs.title")}</Text><Text style={styles.description}>{t("logs.description")}</Text>
       <View style={styles.filters}><Field label={t("logs.userId")} onChangeText={setUserId} value={userId} /><Pressable accessibilityRole="button" accessibilityLabel={t("logs.load")} disabled={!isOnline} onPress={() => load(userId)} style={styles.primary}><Text style={styles.primaryText}>{t("logs.load")}</Text></Pressable></View>

@@ -10,7 +10,7 @@ export function ScreenState({ kind = "empty", title, description, onRetry }) {
   const resolvedTitle = title ?? labels[kind] ?? labels.empty;
   const styles = makeStyles(colors);
 
-  return <View accessibilityRole="summary" accessibilityLabel={resolvedTitle} style={styles.card}>
+  return <View accessibilityLiveRegion="polite" accessibilityRole="summary" accessibilityLabel={resolvedTitle} style={styles.card}>
     <View style={styles.rail}><View style={styles.railMark} /><View style={styles.railMark} /><View style={styles.railMark} /></View>
     <View style={styles.copy}>
       {kind === "loading" ? <ActivityIndicator accessibilityLabel={resolvedTitle} color={colors.action} /> : null}

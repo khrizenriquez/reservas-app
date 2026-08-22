@@ -58,9 +58,10 @@
 - [x] **12 — `feature/mobile-logs`: deliver audit analytics.** Query the published
   `UMG_User_ID` log operation and render original, accessible weekly activity,
   metrics, filters, and list pagination from returned records only.
-- [ ] **13 — `feature/mobile-offline-accessibility`: close resilience and a11y.**
-  Verify stale read states, no queued mutations, screen-reader labels, dynamic
-  type, 44-point targets, focus/announcements, and reduced motion.
+- [x] **13 — `feature/mobile-offline-accessibility`: close resilience and a11y.**
+  Preserve completed reads as stale without queuing mutations; verify
+  screen-reader announcements, dynamic-type defaults, 44-point targets, and
+  reduced-motion dialog transitions.
 - [ ] **14 — `feature/mobile-release-evidence`: produce Android and iOS evidence.**
   Add EAS/Expo build instructions, run Android and iOS smoke paths, record gates
   and manual evidence, and close traceability.

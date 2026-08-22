@@ -43,3 +43,7 @@ and offline mutation blocking.
 `__tests__/logs.test.js` verifies the administrator direct-route guard, the
 published user-id query, week/range local aggregation, accessible activity
 summary, pagination, period validation, offline handling, and retry behavior.
+`__tests__/offline-accessibility.test.js` verifies that read data persists as
+stale after a connectivity loss, unread states remain explicitly offline, and
+shared status/dialog announcements and reduced-motion dialog transitions are
+applied without enabling any offline mutation queue.

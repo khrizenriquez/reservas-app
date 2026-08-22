@@ -5,6 +5,7 @@ import { AccessibleDialog } from "../../components/AccessibleDialog";
 import { ScreenState } from "../../components/ScreenState";
 import { StatusBanner } from "../../components/StatusBanner";
 import { useConnectivity } from "../../connectivity/ConnectivityProvider";
+import { readStatusFor } from "../../connectivity/readState";
 import { useLanguage } from "../../i18n/LanguageProvider";
 import { useSession } from "../../session/SessionProvider";
 import { radius, spacing } from "../../theme/tokens";
@@ -95,7 +96,7 @@ export function UsersScreen({ apiFactory = createRenderApiClient }) {
 
   const errorMessage = getRenderErrorMessage(state.error, language);
   return <View style={styles.screen}>
-    {!isOnline ? <StatusBanner status="offline" /> : null}
+    {!isOnline ? <StatusBanner status={readStatusFor({ hasRead: state.status === "success", isOnline })} /> : null}
     <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.eyebrow}>{t("users.eyebrow")}</Text>
       <Text accessibilityRole="header" style={styles.title}>{t("users.title")}</Text>
