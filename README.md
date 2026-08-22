@@ -104,6 +104,9 @@ bundle exports without uploading an artifact. EAS profiles and the approved
 release-owner handoff are documented in `docs/RELEASE_EVIDENCE.md`; identifiers,
 credentials, submission, and device testing remain explicit owner actions.
 
+GitHub Actions runs this same command for every pull request and push to
+`main`; no credential, signed build, or deployment is required by the workflow.
+
 Expo's SDK 57 manifest lists React 19.2.3, while the current Expo Router
 dependency tree resolves React 19.2.8. The package intentionally excludes only
 React from Expo's version validator; `npm ls` and Expo Doctor remain required to

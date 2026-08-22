@@ -68,10 +68,11 @@
 
 ## Post-release remediation identified by compliance audit
 
-- [ ] **15 — `feature/ci-release-gates`: enforce the mandatory gates in CI.**
+- [x] **15 — `feature/ci-release-gates`: enforce the mandatory gates in CI.**
   Add a GitHub Actions workflow with Node 22.13, `npm ci`, and
   `npm run release:verify`; protect against merges that only have local evidence.
-  Verification: workflow syntax/lockfile install and the full release command.
+  Verification: workflow syntax, `npm ci --dry-run`, and the full release
+  command. Repository branch protection remains an owner setting.
 - [ ] **16 — `fix/connectivity-status`: make read-state status durable and singular.**
   Retain a successful-read marker through failed refreshes, display `stale` for
   retained records, and render/announce only one offline status per portal view.
