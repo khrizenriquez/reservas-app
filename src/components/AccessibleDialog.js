@@ -1,5 +1,6 @@
 import { AccessibilityInfo, Modal, Pressable, StyleSheet, Text, View } from "react-native";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { focusAccessibilityNode } from "../accessibility/focusAccessibilityNode";
 import { useReducedMotion } from "../accessibility/useReducedMotion";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { radius, spacing } from "../theme/tokens";
@@ -10,13 +11,18 @@ export function AccessibleDialog({ children, onClose, title, visible }) {
   const { t } = useLanguage();
   const reducedMotion = useReducedMotion();
   const styles = makeStyles(colors);
-  useEffect(() => { if (visible) AccessibilityInfo.announceForAccessibility?.(title); }, [title, visible]);
+  const titleRef = useRef(null);
+  useEffect(() => {
+    if (!visible) return;
+    AccessibilityInfo.announceForAccessibility?.(title);
+    focusAccessibilityNode(titleRef.current);
+  }, [title, visible]);
   return <Modal accessibilityViewIsModal animationType={reducedMotion ? "none" : "fade"} onRequestClose={onClose} transparent visible={visible}>
     <View style={styles.backdrop}>
       <View accessibilityLiveRegion="polite" accessibilityRole="alert" accessibilityLabel={title} style={styles.dialog}>
         <View style={styles.rail} />
         <View style={styles.content}>
-          <Text accessibilityRole="header" style={styles.title}>{title}</Text>
+          <Text accessibilityRole="header" collapsable={false} ref={titleRef} style={styles.title}>{title}</Text>
           {children}
           <Pressable accessibilityRole="button" accessibilityLabel={t("common.close")} onPress={onClose} style={styles.close}><Text style={styles.closeText}>{t("common.close")}</Text></Pressable>
         </View>

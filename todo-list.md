@@ -80,10 +80,14 @@
   offline, including the portal header plus a data screen; `npm run
   release:verify` passed with 59 tests, 90.95% statements, 81.12% branches,
   21/21 Expo Doctor checks, and successful iOS/Android exports.
-- [ ] **17 — `fix/mobile-accessibility-controls`: complete native accessibility controls.**
+- [x] **17 — `fix/mobile-accessibility-controls`: complete native accessibility controls.**
   Restore the 44-point minimum for every interactive target, add concise hints
   where a label does not describe the outcome, and move dialog focus to a useful
-  native element. Verification: component tests and the manual device checklist.
+  native element. Verification: rendered-control, hint, dialog-focus and native
+  bridge tests; `npm run release:verify` passed with 63 tests, 90.93%
+  statements, 81.31% branches, 21/21 Expo Doctor checks, and successful
+  iOS/Android exports. Physical TalkBack/VoiceOver and large-text evidence
+  remains explicitly tracked as external item 21.
 - [ ] **18 — `fix/reservation-timezone`: define future reservations in Guatemala time.**
   Compare the combined date/time in `America/Guatemala` before exposing upcoming,
   edit, or cancel actions; cover today-before-now, today-after-now, and the

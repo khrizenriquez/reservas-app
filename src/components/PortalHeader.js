@@ -21,9 +21,9 @@ export function PortalHeader() {
     <View style={styles.row}>
       <View><Text style={styles.brand}>{t("shell.brand")}</Text><Text style={styles.title}>{t("shell.portal")}</Text></View>
       <View style={styles.controls}>
-        <Pressable accessibilityRole="button" accessibilityLabel={theme === "dark" ? t("theme.light") : t("theme.dark")} onPress={toggleTheme} style={styles.control}><Text style={styles.controlText}>{theme === "dark" ? "◐" : "◑"}</Text></Pressable>
-        <Pressable accessibilityRole="button" accessibilityLabel={t("language.label")} onPress={() => setLanguage(language === "es" ? "en" : "es")} style={styles.control}><Text style={styles.controlText}>{t(`language.${language === "es" ? "en" : "es"}`)}</Text></Pressable>
-        <Pressable accessibilityRole="button" accessibilityLabel={t("common.signOut")} onPress={exit} style={styles.control}><Text style={styles.controlText}>↗</Text></Pressable>
+        <Pressable accessibilityHint={t(theme === "dark" ? "theme.lightHint" : "theme.darkHint")} accessibilityRole="button" accessibilityLabel={theme === "dark" ? t("theme.light") : t("theme.dark")} onPress={toggleTheme} style={styles.control}><Text style={styles.controlText}>{theme === "dark" ? "◐" : "◑"}</Text></Pressable>
+        <Pressable accessibilityHint={t("language.toggleHint")} accessibilityRole="button" accessibilityLabel={t("language.label")} onPress={() => setLanguage(language === "es" ? "en" : "es")} style={styles.control}><Text style={styles.controlText}>{t(`language.${language === "es" ? "en" : "es"}`)}</Text></Pressable>
+        <Pressable accessibilityHint={t("common.signOutHint")} accessibilityRole="button" accessibilityLabel={t("common.signOut")} onPress={exit} style={styles.control}><Text style={styles.controlText}>↗</Text></Pressable>
       </View>
     </View>
   </View>;

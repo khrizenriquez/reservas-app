@@ -49,6 +49,7 @@ describe("welcome and home", () => {
     expect(await screen.findByText("Lab A")).toBeTruthy();
     expect(screen.queryByText("Lab B")).toBeNull();
     expect(api.listReservations).toHaveBeenCalledWith({ userId: 2 });
+    expect(screen.getByRole("button", { name: "Actualizar reservas" }).props.accessibilityHint).toBe("Solicita las reservas más recientes a Render.");
     await act(async () => { fireEvent.press(screen.getByRole("button", { name: "Consultar disponibilidad" })); });
     expect(mockRouter.navigate).toHaveBeenCalledWith("/portal/availability");
   });

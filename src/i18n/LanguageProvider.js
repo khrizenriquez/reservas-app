@@ -7,9 +7,9 @@ export const messages = {
     access: { description: "Use your institutional account to access laboratory reservations.", password: "Password", submit: "Sign in", submitting: "Signing in…", title: "Institutional access", username: "Institutional email" },
     admin: { active: "Active", conditions: "Conditions", createCondition: "Create condition", createLab: "Create laboratory", date: "Date", description: "Review published laboratories and academic conditions.", editCondition: "Edit condition", editLab: "Edit laboratory", end: "End", error: "Administration could not be loaded.", eyebrow: "INSTITUTIONAL OPERATIONS", inactive: "Inactive", lab: "Laboratory ID", labName: "Laboratory name", labs: "Laboratories", manageLogs: "Review logs", manageUsers: "Manage users", reason: "Reason", saveCondition: "Save condition", saveLab: "Save laboratory", start: "Start", title: "Administration", type: "Type" },
     availability: { available: "Available", date: "Date", datePlaceholder: "YYYY-MM-DD", description: "Find free laboratories for your class schedule.", empty: "No laboratories are available for that time.", end: "End time", error: "Availability could not be loaded.", eyebrow: "PLANNING", formatHint: "Use YYYY-MM-DD and 24-hour HH:MM time.", invalidDate: "Enter a valid date in YYYY-MM-DD format.", invalidInterval: "The end time must be later than the start time.", invalidTime: "Enter valid times in HH:MM format.", list: "Available laboratories", reserve: "Reserve this laboratory", searching: "Checking availability…", start: "Start time", submit: "Search availability", timePlaceholder: "HH:MM", title: "Availability" },
-    common: { close: "Close", loading: "Loading…", signOut: "Sign out" },
+    common: { close: "Close", loading: "Loading…", signOut: "Sign out", signOutHint: "Closes the institutional session on this device." },
     connection: { offline: "Offline. Changes stay disabled until you reconnect.", stale: "Showing previously read information. Refresh when you reconnect." },
-    language: { en: "EN", es: "ES", label: "Language" },
+    language: { en: "EN", es: "ES", label: "Language", toggleHint: "Changes the interface language." },
     landing: {
       access: "Institutional access",
       description: "Plan the practical learning space your class needs, directly from your phone.",
@@ -28,6 +28,7 @@ export const messages = {
       noReservations: "There are no upcoming reservations for this view.",
       professorTitle: "Your next laboratory sessions",
       refresh: "Refresh reservations",
+      refreshHint: "Requests the latest reservations from Render.",
       upcoming: "Upcoming reservations"
     },
     reservations: { assigned: "Assigned institutional user", cancel: "Cancel", cancelAsk: "This reservation will be cancelled. Continue?", cancelTitle: "Confirm cancellation", cancelled: "Reservation cancelled.", confirm: "Confirm reservation", created: "Reservation created.", createTitle: "Create reservation", date: "Date", description: "Review published reservations and keep your next laboratory session current.", detail: "View details", detailTitle: "Reservation details", edit: "Edit", editTitle: "Edit reservation", empty: "There are no reservations for these filters.", end: "End", error: "Reservations could not be loaded.", eyebrow: "ACADEMIC OPERATIONS", filter: "Apply filters", filterDate: "Filter date", filterLab: "Laboratory ID", invalidDate: "Enter a valid date in YYYY-MM-DD format.", invalidId: "Enter a valid laboratory and user ID.", invalidInterval: "The end time must be later than the start time.", invalidPast: "Reservations can only be scheduled for a future date.", invalidReason: "Enter the class reason.", invalidTime: "Enter valid times in HH:MM format.", lab: "Laboratory ID", list: "Published reservations", new: "New reservation", pending: "Pending", reason: "Class reason", save: "Save changes", start: "Start", title: "Reservations", updated: "Reservation updated.", userId: "Requesting user ID" },
@@ -36,15 +37,15 @@ export const messages = {
     navigation: { administration: "Admin", availability: "Availability", home: "Home", profile: "Profile", reservations: "Reservations" },
     shell: { brand: "UMG · Engineering", identity: "Institutional session", portal: "Reservations" },
     states: { empty: "Nothing to show yet", error: "We could not load this information", loading: "Loading information", retry: "Try again", soon: "This workflow will arrive in its planned delivery." },
-    theme: { dark: "Use dark theme", light: "Use light theme" }
+    theme: { dark: "Use dark theme", darkHint: "Changes the interface to dark theme.", light: "Use light theme", lightHint: "Changes the interface to light theme." }
   },
   es: {
     access: { description: "Usa tu cuenta institucional para acceder a las reservas de laboratorios.", password: "Contraseña", submit: "Iniciar sesión", submitting: "Accediendo…", title: "Acceso institucional", username: "Correo institucional" },
     admin: { active: "Activo", conditions: "Condiciones", createCondition: "Crear condición", createLab: "Crear laboratorio", date: "Fecha", description: "Consulta los laboratorios y condiciones académicas publicadas.", editCondition: "Modificar condición", editLab: "Modificar laboratorio", end: "Fin", error: "No pudimos cargar la administración.", eyebrow: "OPERACIÓN INSTITUCIONAL", inactive: "Inactivo", lab: "ID de laboratorio", labName: "Nombre de laboratorio", labs: "Laboratorios", manageLogs: "Consultar logs", manageUsers: "Gestionar usuarios", reason: "Motivo", saveCondition: "Guardar condición", saveLab: "Guardar laboratorio", start: "Inicio", title: "Administración", type: "Tipo" },
     availability: { available: "Disponible", date: "Fecha", datePlaceholder: "AAAA-MM-DD", description: "Busca laboratorios libres para el horario de tu clase.", empty: "No hay laboratorios disponibles para ese horario.", end: "Hora de fin", error: "No pudimos cargar la disponibilidad.", eyebrow: "PLANIFICACIÓN", formatHint: "Usa fecha AAAA-MM-DD y hora de 24 horas HH:MM.", invalidDate: "Ingresa una fecha válida en formato AAAA-MM-DD.", invalidInterval: "La hora de fin debe ser posterior a la hora de inicio.", invalidTime: "Ingresa horas válidas en formato HH:MM.", list: "Laboratorios disponibles", reserve: "Reservar este laboratorio", searching: "Consultando disponibilidad…", start: "Hora de inicio", submit: "Buscar disponibilidad", timePlaceholder: "HH:MM", title: "Disponibilidad" },
-    common: { close: "Cerrar", loading: "Cargando…", signOut: "Cerrar sesión" },
+    common: { close: "Cerrar", loading: "Cargando…", signOut: "Cerrar sesión", signOutHint: "Cierra la sesión institucional de este dispositivo." },
     connection: { offline: "Sin conexión. Los cambios siguen desactivados hasta reconectarte.", stale: "Mostrando información leída anteriormente. Actualiza al reconectarte." },
-    language: { en: "EN", es: "ES", label: "Idioma" },
+    language: { en: "EN", es: "ES", label: "Idioma", toggleHint: "Cambia el idioma de la interfaz." },
     landing: {
       access: "Acceso institucional",
       description: "Planifica el espacio de aprendizaje práctico que necesita tu clase, directamente desde tu teléfono.",
@@ -63,6 +64,7 @@ export const messages = {
       noReservations: "No hay reservas próximas para esta vista.",
       professorTitle: "Tus próximas sesiones de laboratorio",
       refresh: "Actualizar reservas",
+      refreshHint: "Solicita las reservas más recientes a Render.",
       upcoming: "Próximas reservas"
     },
     reservations: { assigned: "Usuario institucional asignado", cancel: "Cancelar", cancelAsk: "Esta reserva se cancelará. ¿Deseas continuar?", cancelTitle: "Confirmar cancelación", cancelled: "Reserva cancelada.", confirm: "Confirmar reserva", created: "Reserva creada.", createTitle: "Crear reserva", date: "Fecha", description: "Consulta las reservas publicadas y mantén al día tu próxima sesión de laboratorio.", detail: "Ver detalle", detailTitle: "Detalle de reserva", edit: "Modificar", editTitle: "Modificar reserva", empty: "No hay reservas para estos filtros.", end: "Fin", error: "No pudimos cargar las reservas.", eyebrow: "OPERACIÓN ACADÉMICA", filter: "Aplicar filtros", filterDate: "Filtrar fecha", filterLab: "ID de laboratorio", invalidDate: "Ingresa una fecha válida en formato AAAA-MM-DD.", invalidId: "Ingresa un ID de laboratorio y usuario válidos.", invalidInterval: "La hora de fin debe ser posterior a la hora de inicio.", invalidPast: "Las reservas solo pueden programarse para una fecha futura.", invalidReason: "Ingresa el motivo de clase.", invalidTime: "Ingresa horas válidas en formato HH:MM.", lab: "ID de laboratorio", list: "Reservas publicadas", new: "Nueva reserva", pending: "Pendiente", reason: "Motivo de clase", save: "Guardar cambios", start: "Inicio", title: "Reservas", updated: "Reserva modificada.", userId: "ID de usuario solicitante" },
@@ -71,7 +73,7 @@ export const messages = {
     navigation: { administration: "Administración", availability: "Disponibilidad", home: "Inicio", profile: "Perfil", reservations: "Reservas" },
     shell: { brand: "UMG · Ingeniería", identity: "Sesión institucional", portal: "Reservas" },
     states: { empty: "Aún no hay información para mostrar", error: "No pudimos cargar esta información", loading: "Cargando información", retry: "Reintentar", soon: "Este flujo llegará en su entrega planificada." },
-    theme: { dark: "Usar tema nocturno", light: "Usar tema claro" }
+    theme: { dark: "Usar tema nocturno", darkHint: "Cambia la interfaz al tema nocturno.", light: "Usar tema claro", lightHint: "Cambia la interfaz al tema claro." }
   }
 };
 

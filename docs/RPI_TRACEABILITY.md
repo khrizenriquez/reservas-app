@@ -19,8 +19,10 @@ query, mapping, and localized failure behavior.
 normalized UI identity, restores it across relaunch, clears it on sign-out, and
 uses the users endpoint only when login omits identity data.
 `__tests__/shared-ux.test.js` verifies theme and language controls, connectivity
-transitions, explicit stale/offline status, accessible dialog semantics, shared
-screen states, and role-aware portal navigation.
+transitions, explicit stale/offline status, concise outcome hints for ambiguous
+header actions, dialog focus requests, shared screen states, and role-aware
+portal navigation. `__tests__/accessibility-focus.test.js` verifies native
+handle resolution and safely skips focus when React Native has no handle.
 `__tests__/home-welcome.test.js` verifies the public native welcome, its access
 handoff, role-scoped upcoming records from the reservations operation, refresh
 and availability actions, localized API failures, and that a completed home
@@ -36,13 +38,15 @@ submission for that identity only, clearing the sensitive field, and offline
 request blocking.
 `__tests__/administration.test.js` verifies that labs and conditions are
 readable to a professor, while an administrator uses the published create
-operations for new laboratory and condition records.
+operations for new laboratory and condition records; it also verifies the
+44-point minimum for secondary edit actions.
 `__tests__/users.test.js` verifies the administrator direct-route guard, Render
 user listing, create/reset/inactivate operations, self-inactivation protection,
 and offline mutation blocking.
 `__tests__/logs.test.js` verifies the administrator direct-route guard, the
 published user-id query, week/range local aggregation, accessible activity
-summary, pagination, period validation, offline handling, and retry behavior.
+summary, 44-point pagination choices, period validation, offline handling, and
+retry behavior.
 `__tests__/offline-accessibility.test.js` verifies that read data persists as
 stale after a connectivity loss, the portal header plus a data screen emit one
 status announcement, unread states remain explicitly offline, and shared
