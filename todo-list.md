@@ -62,9 +62,9 @@
   Preserve completed reads as stale without queuing mutations; verify
   screen-reader announcements, dynamic-type defaults, 44-point targets, and
   reduced-motion dialog transitions.
-- [ ] **14 — `feature/mobile-release-evidence`: produce Android and iOS evidence.**
-  Add EAS/Expo build instructions, run Android and iOS smoke paths, record gates
-  and manual evidence, and close traceability.
+- [x] **14 — `feature/mobile-release-evidence`: produce Android and iOS evidence.**
+  Add EAS/Expo profiles, run reproducible Android/iOS exports and release gates,
+  record the owner-requested waiver of manual smoke, and close traceability.
 
 ## Explicit exclusions
 

@@ -21,6 +21,10 @@ Use AI as an accelerator with strict human accountability, reproducible evidence
 5. Record evidence (commands, SHAs, outputs).
 6. Open PR with AI checklist and risk notes.
 
+For a mobile release, record Android/iOS smoke evidence in
+`docs/RELEASE_EVIDENCE.md`. If the owner declines manual verification, record
+the waiver and residual risk instead of marking a device test as passed.
+
 ## Mandatory PR checklist
 
 - [ ] Scope bound to requirement/gate.

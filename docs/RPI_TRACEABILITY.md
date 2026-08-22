@@ -47,3 +47,7 @@ summary, pagination, period validation, offline handling, and retry behavior.
 stale after a connectivity loss, unread states remain explicitly offline, and
 shared status/dialog announcements and reduced-motion dialog transitions are
 applied without enabling any offline mutation queue.
+`HU-019-S09` is supported by the shared UX and accessibility tests, plus the
+reproducible Android/iOS bundle evidence in `docs/RELEASE_EVIDENCE.md`. Manual
+device smoke evidence is never inferred from an export; its current owner waiver
+and residual risk are recorded there.

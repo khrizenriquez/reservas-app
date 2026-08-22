@@ -11,5 +11,6 @@ The normative sources are specs/product-design.md, specs/acceptance/HU-019-mobil
 | ADR_REGISTER.md | Active architecture decisions |
 | AI_HARNESS_PLAYBOOK.md | Review and evidence rules |
 | COMMIT_START_CHECKLIST.md | First runnable increment checklist |
+| RELEASE_EVIDENCE.md | Android/iOS verification, EAS handoff, and smoke record |
 
 All changes must keep this folder, root docs, and specs aligned.

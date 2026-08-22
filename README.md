@@ -96,6 +96,14 @@ native tooling. The reproducible gates are `npm run check` and `npm run doctor`.
 `npm run build:ios` and `npm run build:android` validate native bundles without
 creating a release build.
 
+## Release verification
+
+Run `npm run release:verify` before handing a candidate to the release owner.
+It runs the contract, traceability, lint, coverage, Expo Doctor, and both native
+bundle exports without uploading an artifact. EAS profiles and the approved
+release-owner handoff are documented in `docs/RELEASE_EVIDENCE.md`; identifiers,
+credentials, submission, and device testing remain explicit owner actions.
+
 Expo's SDK 57 manifest lists React 19.2.3, while the current Expo Router
 dependency tree resolves React 19.2.8. The package intentionally excludes only
 React from Expo's version validator; `npm ls` and Expo Doctor remain required to
