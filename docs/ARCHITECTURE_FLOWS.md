@@ -51,3 +51,7 @@ sequenceDiagram
   rest of the portal. Admin-only create/edit actions are checked at navigation
   and action level, distinguish new records from records with a Render id, and
   are disabled offline; neither UI check is authorization.
+- Users redirects non-admin direct routes to Administration. Its Render-backed
+  create, reset-password, and inactivate operations remain local-form only,
+  clear temporary passwords after each request, block offline, and never offer
+  the current identity an inactivation action.

@@ -6,6 +6,7 @@ import { SessionProvider } from "../src/session/SessionProvider";
 import { ThemeProvider } from "../src/theme/ThemeProvider";
 
 jest.mock("@react-native-community/netinfo", () => ({ __esModule: true, default: { addEventListener: jest.fn() } }));
+jest.mock("expo-router", () => ({ useRouter: () => ({ push: jest.fn() }) }));
 const admin = { id: 1, name: "Admin UMG", email: "admin@umg.edu.gt", role: { id: 1, name: "Administrador" } };
 const teacher = { id: 2, name: "Ana Docente", email: "ana@umg.edu.gt", role: { id: 2, name: "Docente" } };
 const storageFor = (identity) => ({ deleteItemAsync: jest.fn(), getItemAsync: jest.fn().mockResolvedValue(JSON.stringify(identity)), setItemAsync: jest.fn() });

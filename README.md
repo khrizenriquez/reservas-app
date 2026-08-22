@@ -54,6 +54,11 @@ dialogs, which call the documented lab and condition operations. Those controls
 are disabled offline; this visibility is guidance only and never substitutes
 for Render authorization.
 
+Users is an administrator-only direct route. It lists the published user
+directory, creates users, resets another user's password with an ephemeral form
+value, and confirms deactivation. The current administrator never receives an
+inactivation action, and every user mutation is disabled offline.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

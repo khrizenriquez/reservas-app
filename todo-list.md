@@ -52,7 +52,7 @@
 - [x] **10 — `feature/mobile-administration`: deliver labs and conditions.**
   Provide read surfaces for every role and admin UI create/update flows for the
   published lab and condition endpoints.
-- [ ] **11 — `feature/mobile-users`: deliver administrator user management.**
+- [x] **11 — `feature/mobile-users`: deliver administrator user management.**
   Implement users list, create, reset password, inactivate, self-inactivation
   protection, and direct-route role guard.
 - [ ] **12 — `feature/mobile-logs`: deliver audit analytics.** Query the published

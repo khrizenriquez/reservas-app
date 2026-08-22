@@ -36,5 +36,7 @@ submission for that identity only, clearing the sensitive field, and offline
 request blocking.
 `__tests__/administration.test.js` verifies that labs and conditions are
 readable to a professor, while an administrator uses the published create
-operations for new laboratory and condition records. Update and user-management
-coverage is completed in the next delivery increment.
+operations for new laboratory and condition records.
+`__tests__/users.test.js` verifies the administrator direct-route guard, Render
+user listing, create/reset/inactivate operations, self-inactivation protection,
+and offline mutation blocking.
