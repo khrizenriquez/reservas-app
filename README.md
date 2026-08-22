@@ -59,6 +59,11 @@ directory, creates users, resets another user's password with an ephemeral form
 value, and confirms deactivation. The current administrator never receives an
 inactivation action, and every user mutation is disabled offline.
 
+Audit Logs is also an administrator-only direct route. It calls only the
+published `UMG_User_ID` query, then derives weekly or local date-range activity,
+metrics, module counts, and 10/20/50 pagination from the returned records. It
+does not invent an analytics endpoint or server-side date filters.
+
 ## Locked stack
 
 - React Native + Expo + Expo Router

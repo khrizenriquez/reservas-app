@@ -37,9 +37,10 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S07:
     operations: [listAuditLogs]
-    implementation: []
-    tests: []
-    status: PLANNED
+    implementation: [src/features/logs/auditPeriods.js, src/features/logs/LogsScreen.js, app/portal/logs.js]
+    tests: [__tests__/logs.test.js]
+    status: PASS
+    evidence: [npm test -- --coverage]
   HU-019-S08:
     operations: []
     implementation: []

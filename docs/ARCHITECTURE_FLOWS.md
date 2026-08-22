@@ -55,3 +55,7 @@ sequenceDiagram
   create, reset-password, and inactivate operations remain local-form only,
   clear temporary passwords after each request, block offline, and never offer
   the current identity an inactivation action.
+- Logs redirects non-admin direct routes to Administration and calls only
+  `listAuditLogs({ userId })`. Period selection, aggregate metrics, charts, and
+  pagination are deterministic local transforms of that response; offline
+  preserves the explicit state and makes no request.

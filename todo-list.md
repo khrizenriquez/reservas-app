@@ -55,7 +55,7 @@
 - [x] **11 — `feature/mobile-users`: deliver administrator user management.**
   Implement users list, create, reset password, inactivate, self-inactivation
   protection, and direct-route role guard.
-- [ ] **12 — `feature/mobile-logs`: deliver audit analytics.** Query the published
+- [x] **12 — `feature/mobile-logs`: deliver audit analytics.** Query the published
   `UMG_User_ID` log operation and render original, accessible weekly activity,
   metrics, filters, and list pagination from returned records only.
 - [ ] **13 — `feature/mobile-offline-accessibility`: close resilience and a11y.**
