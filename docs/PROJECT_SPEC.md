@@ -19,7 +19,7 @@ hash and active manifest profile are Render v1; it is not a second legacy API.
 | Availability | `/portal/disponibilidad` | list available labs |
 | Reservations | `/portal/reservas` | list/create/detail/update/cancel reservations |
 | Profile | `/portal/perfil` | change password |
-| Administration | `/portal/administracion` | list/create/update labs and conditions; list logs |
+| Administration | `/portal/administracion` | list/create/update labs and conditions |
 | Users (admin UI) | `/portal/usuarios` | list/create/inactivate/reset users |
 | Logs | `/portal/logs` | list logs with `UMG_User_ID` |
 
@@ -58,6 +58,10 @@ backend must enforce authorization.
   signed-in UI role. Only the normalized Administrator role exposes native
   create/edit controls, which select create only for new records and update only
   for records with a Render identifier. Every such control is disabled offline.
+- Users is an administrator-only direct route. It lists published Render users,
+  creates users, resets another user's password with an ephemeral input, and
+  confirms inactivation. The current user never receives an inactivation action
+  and every user mutation is disabled offline.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,
