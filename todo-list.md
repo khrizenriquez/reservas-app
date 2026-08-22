@@ -49,7 +49,7 @@
   ownership UI rules, pagination/list behavior, and offline mutation blocking.
 - [x] **09 — `feature/mobile-profile-password`: implement profile and password change.**
   Show restored identity and call the published change-password route.
-- [ ] **10 — `feature/mobile-administration`: deliver labs and conditions.**
+- [x] **10 — `feature/mobile-administration`: deliver labs and conditions.**
   Provide read surfaces for every role and admin UI create/update flows for the
   published lab and condition endpoints.
 - [ ] **11 — `feature/mobile-users`: deliver administrator user management.**

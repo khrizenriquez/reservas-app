@@ -54,6 +54,10 @@ backend must enforce authorization.
 - Profile displays the normalized SecureStore identity as read-only and calls
   the published password route only for that identity. New passwords are cleared
   after success or failure and are never persisted.
+- Administration reads the published laboratories and conditions for every
+  signed-in UI role. Only the normalized Administrator role exposes native
+  create/edit controls, which select create only for new records and update only
+  for records with a Render identifier. Every such control is disabled offline.
 - Administrative destinations are derived from the normalized UI role and are
   navigation guidance only; they do not claim backend authorization.
 - Every call uses a Render v1 operation from the pinned contract; no v2, proxy,

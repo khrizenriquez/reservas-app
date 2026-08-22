@@ -47,5 +47,7 @@ sequenceDiagram
   a native NetInfo-backed offline banner. It does not queue work; future mutation
   screens consume its connectivity context to disable actions before transport.
 - Offline reads are marked stale. Every mutation is blocked before calling Render when connectivity is unavailable; no operation is queued.
-- Admin/professor visibility is checked at navigation level now and at each
-  mutation action when those screens are introduced; neither is authorization.
+- Administration reads labs and conditions from the same Render client as the
+  rest of the portal. Admin-only create/edit actions are checked at navigation
+  and action level, distinguish new records from records with a Render id, and
+  are disabled offline; neither UI check is authorization.
