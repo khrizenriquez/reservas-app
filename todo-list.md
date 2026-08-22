@@ -66,6 +66,19 @@
   Add EAS/Expo profiles, run reproducible Android/iOS exports and release gates,
   record the owner-requested waiver of manual smoke, and close traceability.
 
+## Post-release remediation identified by compliance audit
+
+- [ ] Add CI enforcement for contract, traceability, lint, coverage, Doctor, and
+  Android/iOS exports.
+- [ ] Resolve the audited Expo/Metro dependency vulnerabilities through a tested
+  SDK migration; do not use a forced audit fix without review.
+- [ ] Remove duplicate offline announcements, restore 44-point target parity,
+  and preserve durable stale-read state after failed refreshes.
+- [ ] Define institutional-timezone future-reservation behaviour and add tests.
+- [ ] Obtain backend authorization enforcement, approved EAS identifiers and
+  credentials, signed platform artifacts, and real Android/iOS accessibility
+  smoke evidence.
+
 ## Explicit exclusions
 
 No v2 endpoints, JWT/refresh flow, push notifications, reports, fabricated
