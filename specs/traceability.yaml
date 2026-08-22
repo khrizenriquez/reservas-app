@@ -49,6 +49,7 @@ scenarios:
     evidence: [npm test -- --coverage]
   HU-019-S09:
     operations: []
-    implementation: []
-    tests: []
-    status: PLANNED
+    implementation: [src/components/AccessibleDialog.js, src/components/ScreenState.js, src/components/StatusBanner.js, src/components/MobileTabBar.js]
+    tests: [__tests__/shared-ux.test.js, __tests__/offline-accessibility.test.js]
+    status: PASS
+    evidence: [npm run release:verify, docs/RELEASE_EVIDENCE.md]

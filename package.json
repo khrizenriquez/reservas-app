@@ -25,7 +25,8 @@
     "check": "npm run contract && npm run traceability && npm run lint && npm test",
     "doctor": "expo-doctor",
     "build:ios": "expo export --platform ios --output-dir /tmp/reservas-app-ios-export",
-    "build:android": "expo export --platform android --output-dir /tmp/reservas-app-android-export"
+    "build:android": "expo export --platform android --output-dir /tmp/reservas-app-android-export",
+    "release:verify": "npm run check && npm run doctor && npm run build:ios && npm run build:android"
   },
   "dependencies": {
     "@react-native-community/netinfo": "12.0.1",
