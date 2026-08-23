@@ -1,65 +1,47 @@
 # Reservas UMG Mobile
 
-Cliente móvil nativo para la reserva de laboratorios de UMG. Está construido
-desde cero con React Native, Expo y Expo Router para Android e iOS; no envuelve
-ni convierte `reservas-front`. Ese repositorio solo es la referencia funcional
-y visual del producto.
+A native mobile client for UMG laboratory reservations. It is built from scratch with React Native, Expo, and Expo Router for Android and iOS; it does not wrap or convert `reservas-front`. That repository is only the product's functional and visual reference.
 
-La aplicación consume exclusivamente Render v1 en
-[`/api/docs/`](https://umg-api-django.onrender.com/api/docs/) mediante el
-contrato versionado del repositorio.
+The app exclusively consumes Render v1 through the repository's versioned contract, documented at [`/api/docs/`](https://umg-api-django.onrender.com/api/docs/).
 
-## Vistas de la aplicación
+## App screens
 
 <p align="center">
-  <img src="assets/screenshots/administration-ios.png" width="30%" alt="Administración: laboratorios, condiciones y accesos administrativos" />
-  <img src="assets/screenshots/reservation-detail-ios.png" width="30%" alt="Detalle de una reserva mostrado en un diálogo nativo" />
-  <img src="assets/screenshots/audit-logs-ios.png" width="30%" alt="Logs de auditoría con actividad semanal y métricas" />
+  <img src="assets/screenshots/administration-ios.png" alt="Administration screen on iOS" width="30%" />
+  <img src="assets/screenshots/reservation-detail-ios.png" alt="Reservation detail dialog on iOS" width="30%" />
+  <img src="assets/screenshots/audit-logs-ios.png" alt="Audit log dashboard on iOS" width="30%" />
 </p>
 
-| Administración | Reservas | Logs de auditoría |
+| Administration | Reservations | Audit logs |
 | --- | --- | --- |
-| Laboratorios, condiciones y rutas administrativas. | Consulta, detalle, creación, edición y cancelación. | Actividad semanal, métricas, filtros y paginación local. |
+| Laboratories, conditions, and administrative workflows. | Browsing, details, creation, updates, and cancellation. | Weekly activity, metrics, filters, and local pagination. |
 
-## Qué incluye
+## What’s included
 
-- Bienvenida, acceso institucional y sesión de interfaz persistida de forma
-  segura con Expo SecureStore.
-- Inicio con próximas reservas por rol, disponibilidad por fecha e intervalo,
-  y flujo completo de reservas.
-- Perfil y cambio de contraseña; administración de laboratorios, condiciones,
-  usuarios y logs para el rol administrativo en la interfaz.
-- Español por defecto, inglés seleccionable, tema claro/oscuro, navegación
-  nativa, estados de carga/error/vacío/stale/offline y mutaciones bloqueadas
-  sin conexión.
-- Accesibilidad nativa: targets de al menos 44 pt, etiquetas y hints para
-  controles de icono ambiguos, foco de diálogo y soporte de reduced motion.
+- Welcome, institutional sign-in, and securely persisted UI session data with Expo SecureStore.
+- A role-aware home screen with upcoming reservations, availability by date and time range, and a complete reservation workflow.
+- Profile and password changes; UI administration for laboratories, conditions, users, and logs for the administrative role.
+- Spanish by default, optional English, light/dark theme support, native navigation, loading/error/empty/stale/offline states, and mutations blocked while offline.
+- Native accessibility: at least 44 pt touch targets, labels and hints for ambiguous icon controls, dialog focus management, and reduced-motion support.
 
-## Límites de seguridad y API
+## API and security boundaries
 
-- Render v1 es el único backend permitido. El cliente no usa endpoints v2,
-  proxy, JWT/refresh, notificaciones, reportes ni datos simulados.
-- [`src/api/renderApi.js`](src/api/renderApi.js) es la única frontera de red:
-  usa los endpoints publicados para login, contraseña, usuarios, laboratorios,
-  condiciones, disponibilidad, reservas y logs.
-- Solo se conserva `{ id, name, email, role }` de la identidad de interfaz en
-  SecureStore. Nunca se persisten contraseñas, tokens, cookies ni respuestas
-  completas de API.
-- La visibilidad por rol en móvil es una ayuda de experiencia; Render debe
-  aplicar autorización y propiedad de objetos en el backend.
+- Render v1 is the only permitted backend. The client does not use v2 endpoints, a proxy, JWT/refresh flows, notifications, reports, or mock data.
+- [`src/api/renderApi.js`](src/api/renderApi.js) is the only network boundary. It uses published endpoints for login, password changes, users, laboratories, conditions, availability, reservations, and logs.
+- Only `{ id, name, email, role }` is retained as UI identity data in SecureStore. Passwords, tokens, cookies, and complete API responses are never persisted.
+- Mobile role-based visibility is an experience aid; Render must enforce authorization and object ownership on the backend.
 
-## Iniciar el proyecto localmente
+## Run locally
 
-### Requisitos
+### Requirements
 
-- Node.js **22.13.x** (`node --version`). El proyecto declara `>=22.13.0 <23`.
-- npm incluido con Node.
-- Para iOS: macOS, Xcode y un simulador iOS compatible con Expo Go.
-- Para Android: Android Studio, un emulador iniciado o un dispositivo Android
-  con Expo Go.
-- Acceso de red a `https://umg-api-django.onrender.com` para consumir Render.
+- Node.js **22.13.x** (the version used by this project).
+- npm, included with Node.js.
+- For iOS: macOS, Xcode, and an iOS simulator compatible with Expo Go.
+- For Android: Android Studio, a running emulator, or a physical Android device with Expo Go.
+- Network access to `https://umg-api-django.onrender.com` to consume Render.
 
-### 1. Instalar y configurar
+### 1. Clone, install, and configure
 
 ```bash
 git clone https://github.com/khrizenriquez/reservas-app.git
@@ -68,81 +50,75 @@ cp .env.example .env
 npm ci
 ```
 
-El archivo `.env` solo contiene configuración pública. No agregues
-credenciales, contraseñas, tokens ni datos personales.
+The `.env` file contains public configuration only. Do not add credentials, passwords, tokens, or personal data.
 
-### 2. Iniciar Metro
+### 2. Start the Expo development server
 
 ```bash
 npm start
 ```
 
-Con Metro abierto puedes usar sus atajos:
+With Metro running, you can use its shortcuts:
 
-- `i` para abrir iOS en un simulador.
-- `a` para abrir Android en un emulador/dispositivo disponible.
-- Escanea el QR con Expo Go para abrirlo en un dispositivo físico que esté en
-  la misma red.
+- Press `i` to open iOS in a simulator.
+- Press `a` to open Android in an available emulator or device.
+- Scan the QR code with Expo Go to open the app on a physical device connected to the same network.
 
-También puedes iniciar una plataforma directamente:
+You can also launch a platform directly:
 
 ```bash
+# Launch the iOS simulator
 npm run ios
+
+# Launch Android emulator or a connected Android device
 npm run android
 ```
 
-Este es un cliente móvil; el script `npm run web` existe por Expo, pero web no
-forma parte de la plataforma configurada ni es una ruta de validación soportada
-por este repositorio.
+You can also scan the QR code shown by Expo Go on a physical device connected to the same network.
 
-### 3. Verificar antes de contribuir
+This is a native mobile client. `npm run web` is provided by Expo, but web is not configured or supported in this repository.
+
+### 3. Verify the project before contributing
 
 ```bash
 npm run contract
-npm run traceability
 npm run lint
 npm test -- --coverage
 ```
 
-Para ejecutar todas las puertas, Expo Doctor y los exports de ambos targets:
+To run every gate, Expo Doctor, and the exports for both targets:
 
 ```bash
 npm run release:verify
 ```
 
-## Arquitectura rápida
+## Quick architecture
 
 ```text
-app/                 Rutas Expo Router
-src/api/             Cliente y mapeadores de Render v1
-src/features/        Flujos de producto por pantalla
-src/session/         Identidad de interfaz y SecureStore
-src/connectivity/    Estado nativo de conectividad
-src/components/      Controles y estados compartidos
-specs/               Contrato, aceptación y trazabilidad
-docs/                Arquitectura, gobierno y evidencia de entrega
+app/                 Expo Router routes
+src/api/             Render v1 client and mappers
+src/features/        Product workflows by screen
+src/session/         UI identity and SecureStore
+src/connectivity/    Native connectivity state
+src/components/      Shared controls and states
+specs/               Contract, acceptance criteria, and traceability
+docs/                Architecture, governance, and delivery evidence
 ```
 
-## Desarrollo y entrega
+## Development and delivery
 
-El proyecto usa trunk-based development: `main` debe permanecer estable; cada
-incremento vive en una rama corta `feature/*` o `fix/*`, pasa las puertas de
-calidad y se integra mediante un PR manual. Consulta
-[todo-list.md](todo-list.md) para el avance, [design.md](design.md) para las
-reglas visuales y [docs/COMPLIANCE_REVIEW.md](docs/COMPLIANCE_REVIEW.md) para
-los hallazgos y requisitos externos pendientes.
+The project uses trunk-based development: `main` must remain stable; every increment lives in a short-lived `feature/*` or `fix/*` branch, passes the quality gates, and is integrated through a manual pull request. Review [todo-list.md](todo-list.md) for current progress, [design.md](design.md) for visual rules, and [docs/COMPLIANCE_REVIEW.md](docs/COMPLIANCE_REVIEW.md) for findings and outstanding external requirements.
 
-## Documentación clave
+## Key documentation
 
-| Documento | Contenido |
+| Document | Contents |
 | --- | --- |
-| [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) | Pantallas, roles, contrato y reglas del producto. |
-| [docs/ARCHITECTURE_FLOWS.md](docs/ARCHITECTURE_FLOWS.md) | Flujos de la app y límites de integración. |
-| [specs/acceptance/HU-019-mobile-client.feature](specs/acceptance/HU-019-mobile-client.feature) | Historias y criterios de aceptación. |
-| [specs/traceability.yaml](specs/traceability.yaml) | Relación entre escenarios, implementación y pruebas. |
-| [docs/RELEASE_EVIDENCE.md](docs/RELEASE_EVIDENCE.md) | Evidencia de bundles y tareas de release. |
+| [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) | Screens, roles, contract, and product rules. |
+| [docs/ARCHITECTURE_FLOWS.md](docs/ARCHITECTURE_FLOWS.md) | App flows and integration boundaries. |
+| [specs/acceptance/HU-019-mobile-client.feature](specs/acceptance/HU-019-mobile-client.feature) | User stories and acceptance criteria. |
+| [specs/traceability.yaml](specs/traceability.yaml) | Relationship between scenarios, implementation, and tests. |
+| [docs/RELEASE_EVIDENCE.md](docs/RELEASE_EVIDENCE.md) | Evidence for bundles and release tasks. |
 
-## Seguridad
+## Security
 
-No confirmes secretos ni datos personales en commits, capturas, logs o archivos
-de entorno. Revisa [SECURITY.md](SECURITY.md) antes de reportar un riesgo.
+Do not commit secrets or personal data in commits, screenshots, logs, or environment files. Review [SECURITY.md](SECURITY.md) before reporting a risk.
