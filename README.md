@@ -1,122 +1,148 @@
-# Reservas App
+# Reservas UMG Mobile
 
-New Android and iOS reservation client built from zero with React Native, Expo, and JavaScript. reservas-front is a product reference only; this repository owns the native implementation.
+Cliente móvil nativo para la reserva de laboratorios de UMG. Está construido
+desde cero con React Native, Expo y Expo Router para Android e iOS; no envuelve
+ni convierte `reservas-front`. Ese repositorio solo es la referencia funcional
+y visual del producto.
 
-## Product and API boundary
+La aplicación consume exclusivamente Render v1 en
+[`/api/docs/`](https://umg-api-django.onrender.com/api/docs/) mediante el
+contrato versionado del repositorio.
 
-The app reproduces the front's supported mobile surfaces: welcome/access, home, availability, reservations, profile, administration, users, and audit logs. Its only backend is Render v1 at https://umg-api-django.onrender.com/api/docs/. Only the pinned /api/* contract in specs/contracts/legacy-openapi.yaml is valid. No v2, JWT/refresh, notifications, reports, proxy, or fabricated endpoint is in scope.
+## Vistas de la aplicación
 
-`src/api/renderApi.js` is the single Render boundary. It covers the published
-login, password, users, labs, conditions, availability, reservations, and logs
-operations; it sends no authorization header, excludes credentials, and maps
-transport and HTTP failures to ES/EN-safe messages. Set only the public base
-URL in `.env` from `.env.example`; do not place credentials in environment files.
+<p align="center">
+  <img src="assets/screenshots/administration-ios.png" width="30%" alt="Administración: laboratorios, condiciones y accesos administrativos" />
+  <img src="assets/screenshots/reservation-detail-ios.png" width="30%" alt="Detalle de una reserva mostrado en un diálogo nativo" />
+  <img src="assets/screenshots/audit-logs-ios.png" width="30%" alt="Logs de auditoría con actividad semanal y métricas" />
+</p>
 
-## Session boundary
+| Administración | Reservas | Logs de auditoría |
+| --- | --- | --- |
+| Laboratorios, condiciones y rutas administrativas. | Consulta, detalle, creación, edición y cancelación. | Actividad semanal, métricas, filtros y paginación local. |
 
-`src/session/SessionProvider.js` restores and stores only `{ id, name, email,
-role }` under Expo SecureStore. The access route sends the password only to the
-published login operation, then clears it from the form; it is never written to
-storage. Administrative navigation is UI visibility only and does not grant
-backend authorization.
+## Qué incluye
 
-## Shared mobile experience
+- Bienvenida, acceso institucional y sesión de interfaz persistida de forma
+  segura con Expo SecureStore.
+- Inicio con próximas reservas por rol, disponibilidad por fecha e intervalo,
+  y flujo completo de reservas.
+- Perfil y cambio de contraseña; administración de laboratorios, condiciones,
+  usuarios y logs para el rol administrativo en la interfaz.
+- Español por defecto, inglés seleccionable, tema claro/oscuro, navegación
+  nativa, estados de carga/error/vacío/stale/offline y mutaciones bloqueadas
+  sin conexión.
+- Accesibilidad nativa: targets de al menos 44 pt, etiquetas y hints para
+  controles de icono ambiguos, foco de diálogo y soporte de reduced motion.
 
-The shell uses a paper-and-academic-ink token system with a recurring time-rail
-edge on states, dialogs, and navigation. It follows the system appearance until
-the user toggles light/dark mode, starts in Spanish with an English selector,
-and uses native connectivity state to display offline guidance. Mutations must
-remain disabled while offline; no operation is queued.
+## Límites de seguridad y API
 
-Completed read results, including an empty result, retain a durable successful
-read marker and remain explicitly stale when connectivity is lost after a
-failed refresh; an unread surface instead reports offline. Each data screen is
-the sole owner of its contextual status banner, so the portal header never
-duplicates visual or screen-reader announcements. Status changes and dialogs
-announce their meaningful text to assistive technology, screen text keeps the
-system dynamic-type default, controls retain 44-point minimum targets, and
-ambiguous icon actions provide concise outcome hints. Dialogs announce and
-request native focus for their title, and remove their transition when the
-device requests reduced motion.
+- Render v1 es el único backend permitido. El cliente no usa endpoints v2,
+  proxy, JWT/refresh, notificaciones, reportes ni datos simulados.
+- [`src/api/renderApi.js`](src/api/renderApi.js) es la única frontera de red:
+  usa los endpoints publicados para login, contraseña, usuarios, laboratorios,
+  condiciones, disponibilidad, reservas y logs.
+- Solo se conserva `{ id, name, email, role }` de la identidad de interfaz en
+  SecureStore. Nunca se persisten contraseñas, tokens, cookies ni respuestas
+  completas de API.
+- La visibilidad por rol en móvil es una ayuda de experiencia; Render debe
+  aplicar autorización y propiedad de objetos en el backend.
 
-The public root is a native institutional welcome: it presents the academic
-planning journey, visual laboratory cards, and a direct access action. A
-restored identity changes that action to Portal without exposing stored data.
-The role-aware Home requests the documented reservations operation, shows at
-most three upcoming records in its authorized UI scope, and provides the
-availability action. It never invents counts, reservations, or availability.
+## Iniciar el proyecto localmente
 
-Availability accepts only a real `YYYY-MM-DD` date and an increasing `HH:MM`
-interval before calling the documented availability operation. Its native time
-rail marks the returned laboratories as available, and its reservation handoff
-contains only `labId`, date, start time, and end time.
+### Requisitos
 
-Reservations consumes Render list/create/detail/update/cancel operations only.
-Professor UI exposes mutations solely for own future records; cancellation uses
-a native confirmation dialog and every mutation is disabled offline.
+- Node.js **22.13.x** (`node --version`). El proyecto declara `>=22.13.0 <23`.
+- npm incluido con Node.
+- Para iOS: macOS, Xcode y un simulador iOS compatible con Expo Go.
+- Para Android: Android Studio, un emulador iniciado o un dispositivo Android
+  con Expo Go.
+- Acceso de red a `https://umg-api-django.onrender.com` para consumir Render.
 
-Profile exposes the restored UI identity read-only and sends a new password only
-to the documented Render password operation for that identity. The password is
-cleared after every request and never persisted.
-
-Administration exposes Render laboratories and conditions to every signed-in UI
-role. Only the normalized Administrator role can open the native create/edit
-dialogs, which call the documented lab and condition operations. Those controls
-are disabled offline; this visibility is guidance only and never substitutes
-for Render authorization.
-
-Users is an administrator-only direct route. It lists the published user
-directory, creates users, resets another user's password with an ephemeral form
-value, and confirms deactivation. The current administrator never receives an
-inactivation action, and every user mutation is disabled offline.
-
-Audit Logs is also an administrator-only direct route. It calls only the
-published `UMG_User_ID` query, then derives weekly or local date-range activity,
-metrics, module counts, and 10/20/50 pagination from the returned records. It
-does not invent an analytics endpoint or server-side date filters.
-
-## Locked stack
-
-- React Native + Expo + Expo Router
-- JavaScript, native fetch, Jest, and ESLint
-- Expo SecureStore for normalized UI identity only
-- Spanish by default, English selectable, light and dark themes
-
-## Delivery
-
-Read design.md, docs/PROJECT_SPEC.md, and todo-list.md. Each numbered todo item is one feature/* or fix/* branch. Run contract, traceability, lint, and Jest coverage gates before pushing; the owner performs manual PR merge, after which work restarts from updated main.
-
-## Run the native scaffold
-
-Use Node 22.13 or later (within Node 22), then install and start the Expo
-development server:
+### 1. Instalar y configurar
 
 ```bash
-npm install
+git clone https://github.com/khrizenriquez/reservas-app.git
+cd reservas-app
+cp .env.example .env
+npm ci
+```
+
+El archivo `.env` solo contiene configuración pública. No agregues
+credenciales, contraseñas, tokens ni datos personales.
+
+### 2. Iniciar Metro
+
+```bash
 npm start
 ```
 
-Use `npm run ios` or `npm run android` on a machine with the corresponding
-native tooling. The reproducible gates are `npm run check` and `npm run doctor`.
-`npm run build:ios` and `npm run build:android` validate native bundles without
-creating a release build.
+Con Metro abierto puedes usar sus atajos:
 
-## Release verification
+- `i` para abrir iOS en un simulador.
+- `a` para abrir Android en un emulador/dispositivo disponible.
+- Escanea el QR con Expo Go para abrirlo en un dispositivo físico que esté en
+  la misma red.
 
-Run `npm run release:verify` before handing a candidate to the release owner.
-It runs the contract, traceability, lint, coverage, Expo Doctor, and both native
-bundle exports without uploading an artifact. EAS profiles and the approved
-release-owner handoff are documented in `docs/RELEASE_EVIDENCE.md`; identifiers,
-credentials, submission, and device testing remain explicit owner actions.
+También puedes iniciar una plataforma directamente:
 
-GitHub Actions runs this same command for every pull request and push to
-`main`; no credential, signed build, or deployment is required by the workflow.
+```bash
+npm run ios
+npm run android
+```
 
-Expo's SDK 57 manifest lists React 19.2.3, while the current Expo Router
-dependency tree resolves React 19.2.8. The package intentionally excludes only
-React from Expo's version validator; `npm ls` and Expo Doctor remain required to
-detect actual peer conflicts.
+Este es un cliente móvil; el script `npm run web` existe por Expo, pero web no
+forma parte de la plataforma configurada ni es una ruta de validación soportada
+por este repositorio.
 
-## Security
+### 3. Verificar antes de contribuir
 
-Never commit secrets or personal data. The app persists only id, name, email, and role in SecureStore; password, token, cookie, and full API responses are forbidden. Role UI is not backend authorization.
+```bash
+npm run contract
+npm run traceability
+npm run lint
+npm test -- --coverage
+```
+
+Para ejecutar todas las puertas, Expo Doctor y los exports de ambos targets:
+
+```bash
+npm run release:verify
+```
+
+## Arquitectura rápida
+
+```text
+app/                 Rutas Expo Router
+src/api/             Cliente y mapeadores de Render v1
+src/features/        Flujos de producto por pantalla
+src/session/         Identidad de interfaz y SecureStore
+src/connectivity/    Estado nativo de conectividad
+src/components/      Controles y estados compartidos
+specs/               Contrato, aceptación y trazabilidad
+docs/                Arquitectura, gobierno y evidencia de entrega
+```
+
+## Desarrollo y entrega
+
+El proyecto usa trunk-based development: `main` debe permanecer estable; cada
+incremento vive en una rama corta `feature/*` o `fix/*`, pasa las puertas de
+calidad y se integra mediante un PR manual. Consulta
+[todo-list.md](todo-list.md) para el avance, [design.md](design.md) para las
+reglas visuales y [docs/COMPLIANCE_REVIEW.md](docs/COMPLIANCE_REVIEW.md) para
+los hallazgos y requisitos externos pendientes.
+
+## Documentación clave
+
+| Documento | Contenido |
+| --- | --- |
+| [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) | Pantallas, roles, contrato y reglas del producto. |
+| [docs/ARCHITECTURE_FLOWS.md](docs/ARCHITECTURE_FLOWS.md) | Flujos de la app y límites de integración. |
+| [specs/acceptance/HU-019-mobile-client.feature](specs/acceptance/HU-019-mobile-client.feature) | Historias y criterios de aceptación. |
+| [specs/traceability.yaml](specs/traceability.yaml) | Relación entre escenarios, implementación y pruebas. |
+| [docs/RELEASE_EVIDENCE.md](docs/RELEASE_EVIDENCE.md) | Evidencia de bundles y tareas de release. |
+
+## Seguridad
+
+No confirmes secretos ni datos personales en commits, capturas, logs o archivos
+de entorno. Revisa [SECURITY.md](SECURITY.md) antes de reportar un riesgo.
